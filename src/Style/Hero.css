@@ -1,0 +1,22 @@
+/* Add this to your CSS */
+section {
+    position: relative;
+    height: 100vh; /* Ensure the section takes up the entire viewport */
+    overflow: hidden;
+  }
+  
+  h1 {
+    font-size: 10vw; /* Make text size responsive and large */
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  
