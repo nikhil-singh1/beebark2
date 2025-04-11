@@ -2,9 +2,9 @@ import React from "react";
 
 const Thankyou = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden w-120">
-        <div className="bg-gray-200 h-60 flex items-center justify-center">
+        <div className="bg-gray-50 h-60 flex items-center justify-center">
           <img
             src="/thankyou.png" // Placeholder illustration
             alt="Illustration"
@@ -22,16 +22,16 @@ const Thankyou = () => {
             Confirm Email
           </button>
         </div>
-        <div className="bg-gray-100 text-center py-4">
-          <p className="text-gray-500 text-sm">Follow us on:</p>
+        <div className="bg-black text-center py-4">
+          <p className="text-white text-sm">Follow us on:</p>
           <div className="flex justify-center space-x-4 mt-2">
-            <a href="#" className="text-gray-600 hover:text-black text-lg">
+            <a href="#" className="text-white hover:text-gray-200 text-lg">
               <i className="fab fa-instagram"></i>
             </a>
-            <a href="#" className="text-gray-600 hover:text-black text-lg">
+            <a href="#" className="text-white hover:text-gray-200 text-lg">
               <i className="fab fa-facebook"></i>
             </a>
-            <a href="#" className="text-gray-600 hover:text-black text-lg">
+            <a href="#" className="text-white hover:text-gray-200 text-lg">
               <i className="fab fa-linkedin"></i>
             </a>
           </div>
