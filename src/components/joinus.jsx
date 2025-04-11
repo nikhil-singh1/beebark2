@@ -35,7 +35,7 @@ const JoinUs = () => {
     };
   
     try {
-      const response = await fetch("http://localhost:5000/api/business/register", {
+      const response = await fetch("https://beebark-backend1.vercel.app/api/business/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -139,7 +139,7 @@ const JoinUs = () => {
               >
                 <option value="">Select Category</option>
                 <option value="architect">Architect</option>
-                <option value="web_developer">Web Developer</option>
+                <option value="construction">Construction</option>
                 <option value="real_estate">Real Estate</option>
                 <option value="designer">Designer</option>
                 <option value="others">Others</option>

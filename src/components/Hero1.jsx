@@ -41,7 +41,7 @@ const Hero1 = () => {
     opacity: 1,
     transform: "translateX(0px)",
     from: { opacity: 0, transform: "translateX(20px)" },
-    delay: 2500, // Delay before letters appear
+    delay: 1500, // Delay before letters appear
     config: { tension: 100, friction: 25 },
   });
 
@@ -50,7 +50,7 @@ const Hero1 = () => {
     opacity: 1,
     transform: "translateX(0px)",
     from: { opacity: 0, transform: "translateX(20px)" },
-    delay: 3000, // Delay before tagline appears
+    delay: 2000, // Delay before tagline appears
     config: { tension: 100, friction: 25 },
   });
 
@@ -59,13 +59,13 @@ const Hero1 = () => {
       setRightLogoSpring({
         transform: isMobile ? "translateX(400px)" : "translateX(1000px)", // Different for mobile & laptop
       });
-    }, 2000);
+    }, 1000);
 
     setTimeout(() => {
       setLeftLogoSpring({
         transform: isMobile ? "translateX(-140px)" : "translateX(-380px)", // Different for mobile & laptop
       });
-    }, 2000);
+    }, 1000);
   }, [setRightLogoSpring, setLeftLogoSpring, isMobile]);
 
   return (
