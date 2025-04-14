@@ -14,6 +14,7 @@ import ScrollingHighlight from '../components/Welcome';
 import JoinUs from '../components/joinus';
 import ReferralSection from '../components/refer';
 import ExclusiveOffer from '../components/exclusiveoffer';
+import RegisterNowSection from '../components/section1';
 
 const Home = () => {
   return (
@@ -30,6 +31,7 @@ const Home = () => {
       <HowItWorks /> */}
       <ExclusiveOffer />
         <ReferralSection />
+        <RegisterNowSection />
     
     
     </main>

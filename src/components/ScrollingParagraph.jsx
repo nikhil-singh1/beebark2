@@ -102,32 +102,38 @@ const Scrolling = () => {
   return (
     <section ref={wrapperRef} className="relative w-full h-screen overflow-hidden flex items-center bg-gray-50">
 
-<div className="w-1/3 text-left px-5 pr-10 md:pr-20">
-<h2 className="text-4xl md:text-6xl font-bold text-[#221912]">
-  Our <span className="text-yellow-500">SaaS</span> Services
-</h2>
-           </div>
+ <div className="w-1/3 text-left px-5 pr-20 z-10">
+    <h2 className="text-4xl md:text-6xl font-bold text-[#221912]">
+      Our <span className="text-yellow-500">SaaS</span> Services
+    </h2>
+  </div>
+    
       {/* 🚀 Cards container */}
       <div
         ref={containerRef}
-        className="flex space-x-10 px-10 h-full items-center relative z-10 bg-white"
+        className="flex space-x-10 mx-10 px-12 h-full items-center relative z-10 bg-transparent"
         style={{
-          width: `${services.length * 340}px`,
+          width: `${services.length * 400}px`,
+          backgroundImage: 'url("/service_bg.jpg")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
         }}
-    
-      >
+        >
+
+      
        {services.map((service, index) => (
           <div
             key={index}
-            className="w-[340px] h-[500px] flex-shrink-0 bg-white shadow-lg border-4 border-yellow-500 hover:bg-[#221912] hover:text-white transition-colors duration-300"
+            className="w-[340px] h-[500px] flex-shrink-0 bg-white shadow-lg border-4 border-yellow-500"
           >
             <img
               src={service.image}
               alt={service.title}
               className="w-full h-56 object-cover"
             />
-            <h3 className="text-xl font-bold mt-4 text-gray-900 p-4 hover:text-white">{service.title}</h3>
-            <p className="text-gray-600 mt-2 p-4 hover:text-white">{service.description}</p>
+            <h3 className="text-xl font-bold mt-4 text-gray-900 p-4">{service.title}</h3>
+            <p className="text-gray-600 mt-2 p-4 ">{service.description}</p>
           </div>
         ))}
       </div>

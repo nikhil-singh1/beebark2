@@ -65,9 +65,9 @@ const JoinUs = () => {
           <span className="text-3xl font-bold text-herocolor text-left">
             Join TheBeeBark
           </span>
-          <span className="text-3xl font-bold text-yellow-400"> PRO</span>
+          <span className="text-3xl font-bold text-yellow-500"> PRO</span>
           <p className="text-left text-gray-600 text-lg">
-            Unlock TheBeeBark PRO! Complete your profile to start using TheBeeBark PRO today.
+            Unlock TheBeeBark <span className="text-yellow-500"> PRO! </span>Complete your profile to start using TheBeeBark<span className="text-yellow-500"> PRO! </span>today.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -81,7 +81,7 @@ const JoinUs = () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-300 focus:outline-none text-gray-600"
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                 required
               />
             </div>
@@ -97,7 +97,7 @@ const JoinUs = () => {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-300 focus:outline-none text-gray-600"
+                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                   required
                 />
                 <button
@@ -120,7 +120,7 @@ const JoinUs = () => {
                 id="businessName"
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-300 focus:outline-none text-gray-600"
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                 required
               />
             </div>
@@ -134,7 +134,7 @@ const JoinUs = () => {
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-300 focus:outline-none text-gray-600"
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                 required
               >
                 <option value="">Select Category</option>
@@ -157,7 +157,7 @@ const JoinUs = () => {
                   id="otherCategory"
                   value={otherCategory}
                   onChange={(e) => setOtherCategory(e.target.value)}
-                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-300 focus:outline-none text-gray-600"
+                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                   required
                 />
               </div>
@@ -173,7 +173,7 @@ const JoinUs = () => {
                   id="countryCode"
                   value={countryCode}
                   onChange={(e) => setCountryCode(e.target.value)}
-                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-300 focus:outline-none text-gray-600"
+                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                   required
                 >
                   {/* Country options */}
@@ -240,7 +240,7 @@ const JoinUs = () => {
                   id="phone"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-300 focus:outline-none text-gray-600"
+                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                   required
                 />
               </div>
@@ -253,16 +253,16 @@ const JoinUs = () => {
                 id="agree"
                 checked={agree}
                 onChange={() => setAgree(!agree)}
-                className="h-4 w-4 text-yellow-300 border-gray-300 rounded"
+                className="h-4 w-4 text-yellow-500 border-gray-300 rounded"
                 required
               />
               <label htmlFor="agree" className="ml-2 text-sm text-gray-600">
                 I agree to the{" "}
-                <a href="/terms" className="text-yellow-300 hover:text-yellow-400">
+                <a href="/terms" className="text-yellow-500 hover:text-yellow-400">
                   Terms and Conditions
                 </a>{" "}
                 and{" "}
-                <a href="/privacy" className="text-yellow-300 hover:text-yellow-400">
+                <a href="/privacy" className="text-yellow-500 hover:text-yellow-400">
                   Privacy Policy
                 </a>
                 .
@@ -272,7 +272,7 @@ const JoinUs = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full py-2 bg-yellow-300 text-white font-semibold rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-herocolor"
+              className="w-full py-2 bg-yellow-500 text-white font-semibold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-herocolor"
             >
               Submit
             </button>
@@ -290,7 +290,7 @@ const JoinUs = () => {
               { Icon: FileText, text: "Complete your profile to start showcasing your services and get more clients." },
             ].map(({ Icon, text }, index) => (
               <div key={index} className="flex items-start space-x-6">
-                <Icon className="h-7 w-7 text-yellow-400" />
+                <Icon className="h-7 w-7 text-yellow-500" />
                 <p className="text-base text-herocolor">{text}</p>
               </div>
             ))}
