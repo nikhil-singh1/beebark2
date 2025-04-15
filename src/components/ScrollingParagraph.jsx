@@ -74,7 +74,7 @@ const Scrolling = () => {
 
   useEffect(() => {
     const container = containerRef.current;
-    const extraScroll = 400;
+    const extraScroll = 450;
     const totalScrollWidth = container.scrollWidth - window.innerWidth + extraScroll;
 
     // Animate cards scroll
@@ -102,16 +102,16 @@ const Scrolling = () => {
   return (
     <section ref={wrapperRef} className="relative w-full h-screen overflow-hidden flex items-center bg-gray-50">
 
- <div className="w-1/3 text-left px-5 pr-20 z-10">
-    <h2 className="text-4xl md:text-6xl font-bold text-[#221912]">
-      Our <span className="text-yellow-500">SaaS</span> Services
+ <div className="w-1/3 text-left px-5 mr-20 pr-20 z-10">
+    <h2 className="text-3xl md:text-7xl font-bold text-[#221912]">
+      Our <span className="text-yellow-500 text-4xl md:text-8xl">SaaS</span> Services
     </h2>
   </div>
     
       {/* 🚀 Cards container */}
       <div
         ref={containerRef}
-        className="flex space-x-10 mx-10 px-12 h-full items-center relative z-10 bg-transparent"
+        className="flex space-x-10 mx-12 px-12 h-full items-center relative z-10 bg-transparent"
         style={{
           width: `${services.length * 400}px`,
          

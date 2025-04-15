@@ -2,10 +2,10 @@ import React from "react";
 
 const TermsConditions = () => {
   return (
-    <div className="bg-[#2d2119] text-white min-h-screen px-6 py-12 md:px-20">
+    <div className="bg-white text-[#2d2119] min-h-screen px-6 py-12 md:px-20">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-yellow-500 text-4xl font-bold mb-8">Terms & Conditions</h1>
-        <p className="text-lg text-gray-200 mb-6">
+        <p className="text-lg text-black mb-6">
           <strong>Beebark Premium Offer</strong> for Architects, Interior Designers & Real Estate Professionals
         </p>
 
@@ -89,7 +89,7 @@ const TermsConditions = () => {
 const Section = ({ title, children }) => (
   <div className="mb-10">
     <h2 className="text-2xl font-semibold text-yellow-500 mb-2">{title}</h2>
-    <p className="text-gray-50 leading-relaxed">{children}</p>
+    <p className="text-gray-800 leading-relaxed">{children}</p>
   </div>
 );
 
