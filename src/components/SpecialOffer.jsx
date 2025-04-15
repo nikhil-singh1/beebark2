@@ -55,11 +55,14 @@ const SpecialOffer = () => {
             Avail Now!
           </button>
           <p className="text-gray-500 text-sm mt-2">
-            See Offer Terms. Overages apply if contact or email send limit is exceeded.{" "}
-            <a href="#" className="text-blue-500">
+            See{" "}
+            <a href="/terms" className="text-yellow-500 font-semibold hover:text-yellow-600"> Offer Terms.</a>{" "}
+            Overages apply if contact or email send limit is exceeded.{" "}
+            <a href="/terms" className="text-[#221912] font-semibold">
               Learn more
             </a>
           </p>
+        
         </div>
       </div>
       <div className="mt-6 text-center">

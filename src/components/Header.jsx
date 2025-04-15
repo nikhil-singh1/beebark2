@@ -24,10 +24,10 @@ export default function Header() {
         {/* Register Now Button */}
         <div>
           <Link
-            to="/register"
-            className="border border-black text-black px-4 py-2 rounded-md hover:bg-[#221912] hover:text-white transition-all duration-200"
+            to="/manifesto"
+            className="border font-semibold text-black bg-yellow-500 px-4 py-2 rounded-md hover:bg-yellow-600 hover:text-white transition-all duration-200"
           >
-            Register Now
+            BeeBark Manifesto
           </Link>
         </div>
       </header>

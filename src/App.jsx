@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import AdminLogin from "./components/AdminLogin";
 import Register from "./pages/Register";
 import Thankyou from "./components/thankyou";
+import ManifestoPage from "./pages/Manifesto";
+import TermsConditions from "./pages/terms";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -25,6 +27,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/manifesto" element={<ManifestoPage />} />
+        <Route path="/terms" element={<TermsConditions />} />
         <Route path="/thankyou" element={<Thankyou />} />
       </Routes>
       </>

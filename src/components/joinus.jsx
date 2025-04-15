@@ -261,10 +261,10 @@ const JoinUs = () => {
                 <a href="/terms" className="text-yellow-500 hover:text-yellow-400">
                   Terms and Conditions
                 </a>{" "}
-                and{" "}
+                {/* and{" "}
                 <a href="/privacy" className="text-yellow-500 hover:text-yellow-400">
                   Privacy Policy
-                </a>
+                </a> */}
                 .
               </label>
             </div>
