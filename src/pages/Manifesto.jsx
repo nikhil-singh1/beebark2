@@ -15,7 +15,7 @@ export default function ManifestoPage() {
     {
       title: "We Surrender to a Higher Vision",
       description:
-        "We are not here to just build a digital agency. We are here to create transformation—within ourselves, for our clients, and through every interaction.",
+        "We are not here to just build an ecosystem. We are here to create transformation—within ourselves, for our clients, and through every interaction.",
     },
     {
       title: "We Stay Accountable",
