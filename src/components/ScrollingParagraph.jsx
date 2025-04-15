@@ -114,10 +114,7 @@ const Scrolling = () => {
         className="flex space-x-10 mx-10 px-12 h-full items-center relative z-10 bg-transparent"
         style={{
           width: `${services.length * 400}px`,
-          backgroundImage: 'url("/service_bg.jpg")',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
+         
         }}
         >
 
