@@ -21,9 +21,16 @@ export default function Header() {
           </Link>
         </div>
 
+        {/* Register Now Button */}
+        <div>
+          <Link
+            to="/register"
+            className="border border-black text-black px-4 py-2 rounded-md hover:bg-[#221912] hover:text-white transition-all duration-200"
+          >
+            Register Now
+          </Link>
+        </div>
       </header>
-
-      
     </>
   );
 }

@@ -7,15 +7,15 @@ import Footer from '../components/Footer';
 
 import Header from '../components/Header';
 import JoinUs from '../components/joinus';
-import ReferralSection from '../components/refer';
+import ReferralSection2 from '../components/refer2';
 
 
 const Register = () => {
   return (
     <main className="bg-white">
       <Header />
-   <JoinUs />
-      <ReferralSection />
+      <JoinUs />
+      <ReferralSection2 />
     </main>
   )
 }

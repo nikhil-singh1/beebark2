@@ -15,7 +15,7 @@ const SpecialOffer = () => {
           <h2 className="text-3xl font-bold text-gray-800 pb-4">
             Exclusive offer for{" "}
             <span className="text-black underline decoration-pink-500">
-              Architects & Interior Designers
+              Architects, Interior Designers & Real Estate Industry.
             </span>
           </h2>
 

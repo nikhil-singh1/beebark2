@@ -12,7 +12,7 @@ const RegisterNowSection = () => {
 
   useEffect(() => {
     const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 15); // 15 days from now
+    targetDate.setDate(targetDate.getDate() + 8); // 15 days from now
 
     const timer = setInterval(() => {
       const now = new Date();
@@ -36,7 +36,7 @@ const RegisterNowSection = () => {
       <p className="text-lg md:text-2xl text-white mb-6">
         Unlock{" "}
         <span className="text-yellow-500 font-bold">₹4,10,000</span> worth of
-        premium services at <span className="underline">no cost</span>
+        premium services.
       </p>
 
       <div className="bg-yellow-500 text-[#221912] font-bold text-xl px-6 py-3 rounded-full shadow-lg">
