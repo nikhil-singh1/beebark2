@@ -42,7 +42,7 @@ const services = [
     image: "/image6.jpeg",
   },
   {
-    title: "Strategic Project Binding & Scalable Business Expansion",
+    title: "Strategic Project Bidding & Scalable Business Expansion",
     description:
       "Optimizing bids for high-value projects with data-driven strategies. Driving sustainable growth through smart scaling solutions.",
     image: "/image7.jpeg",
