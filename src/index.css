@@ -157,3 +157,9 @@ canvas {
 .animate-scroll-left-to-right {
   animation: scroll-left-to-right 10s linear infinite;
 }
+
+.list-check li::before {
+  content: '✓';
+  color: black;
+  margin-right: 8px;
+}
