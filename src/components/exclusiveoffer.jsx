@@ -65,7 +65,7 @@ const ExclusiveOffer = () => {
               Opt for <span className="text-black">Meta & LinkedIn Marketing</span>
             </h3>
             <p className="text-black">
-              at just ₹35,000/per month for next 6 months to supercharge your online growth.
+              at just <span className="underline decoration-green-500">₹35,000/per month</span> for next 6 months to supercharge your online growth.
             </p>
           </div>
         </div>

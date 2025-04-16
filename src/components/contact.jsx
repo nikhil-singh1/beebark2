@@ -43,17 +43,17 @@ export default function Contact() {
           {sections.map((section, index) => (
             <div
               key={index}
-              className="relative group cursor-pointer w-full"
+              className="relative group cursor-pointer w-full border-4 border-yellow-500"
               onClick={() => navigate("/LetsTalk", { state: { helpType: section.title } })}
             >
               {/* Image */}
               <img
                 src={section.image}
                 alt={section.title}
-                className="w-full aspect-square object-cover rounded-lg shadow-lg"
+                className="w-full aspect-square object-cover  shadow-lg"
               />
               {/* Overlay and Title */}
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
                 <h2 className="text-white text-xl font-bold">{section.title}</h2>
               </div>
             </div>

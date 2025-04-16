@@ -35,7 +35,7 @@ const RegisterNowSection = () => {
 
       <p className="text-lg md:text-2xl text-white mb-6">
         Unlock{" "}
-        <span className="text-yellow-500 font-bold">₹4,10,000</span> worth of
+        <span className="text-yellow-500 font-bold underline decoration-green-500">₹4,10,000</span> worth of
         premium services.
       </p>
 

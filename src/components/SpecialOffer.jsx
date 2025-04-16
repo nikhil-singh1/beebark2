@@ -22,22 +22,22 @@ const SpecialOffer = () => {
           <ul className="space-y-4 text-gray-700 text-lg">
             <li>
               <span className="text-yellow-500 font-bold">✔</span>{" "}
-              <b>Comprehensive Digital Audit (₹10,000 Value)</b> - Gain deep
+              <b>Comprehensive Digital Audit (<span className="underline decoration-green-500">₹10,000 Value</span>)</b> - Gain deep
               insights into your digital presence.
             </li>
             <li>
               <span className="text-yellow-500 font-bold">✔</span>{" "}
-              <b>1-Year Free Access to Our Future SaaS Platform (₹2,50,000 Value)</b>{" "}
+              <b>1-Year Free Access to Our Future SaaS Platform (<span className="underline decoration-green-500">₹2,50,000 Value</span>)</b>{" "}
               - Stay ahead with cutting-edge AI-driven tools.
             </li>
             <li>
               <span className="text-yellow-500 font-bold">✔</span>{" "}
-              <b>Fully Customizable Website (₹1,00,000 Value)</b> - A high-end
+              <b>Fully Customizable Website (<span className="underline decoration-green-500">₹1,00,000 Value</span>)</b> - A high-end
               digital identity tailored to your brand.
             </li>
             <li>
               <span className="text-yellow-500 font-bold">✔</span>{" "}
-              <b>Premium Branding Package (Up to ₹50,000 Value)</b> - Elevate your
+              <b>Premium Branding Package (Up to <span className="underline decoration-green-500">₹50,000 Value</span>)</b> - Elevate your
               brand presence with professional branding services.
             </li>
           </ul>
@@ -67,7 +67,7 @@ const SpecialOffer = () => {
       </div>
       <div className="mt-6 text-center">
         <p className="bg-yellow-400 text-black font-bold text-lg py-3 px-6 rounded-lg inline-block">
-          Total Value -  ₹4,10,000 - <span><a href="/terms" className="text-[#221912] font-semibold hover:text-black">See Offer Terms.</a></span>
+          Total Value -  ₹4,10,000 - <span><a href="/terms" className="text-white font-semibold hover:text-black">See Offer Terms.</a></span>
         </p>
       </div>
     </div>

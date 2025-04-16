@@ -38,7 +38,7 @@ export default function LetsTalk() {
                 type="text"
                 id="name"
                 required
-                className="w-full p-4 border border-gray-300 rounded-md"
+                className="w-full p-4 border border-gray-300 rounded-md text-black"
               />
             </div>
 
@@ -50,7 +50,7 @@ export default function LetsTalk() {
                 type="tel"
                 id="phone"
                 required
-                className="w-full p-4 border border-gray-300 rounded-md"
+                className="w-full p-4 border border-gray-300 rounded-md text-black"
               />
             </div>
 
@@ -62,7 +62,7 @@ export default function LetsTalk() {
                 type="email"
                 id="email"
                 required
-                className="w-full p-4 border border-gray-300 rounded-md"
+                className="w-full p-4 border border-gray-300 rounded-md text-black"
               />
             </div>
 
@@ -75,7 +75,7 @@ export default function LetsTalk() {
                 id="regarding"
                 value={helpType}
                 readOnly
-                className="w-full p-4 border border-gray-300 rounded-md bg-gray-100"
+                className="w-full p-4 border border-gray-300 rounded-md bg-yellow-300 text-black"
               />
             </div>
 
@@ -87,7 +87,7 @@ export default function LetsTalk() {
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full p-4 border border-gray-300 rounded-md"
+                className="w-full p-4 border border-gray-300 rounded-md text-black"
                 required
               >
                 <option value="">Select Category</option>
@@ -110,7 +110,7 @@ export default function LetsTalk() {
                   id="otherCategory"
                   value={otherCategory}
                   onChange={(e) => setOtherCategory(e.target.value)}
-                  className="w-full p-4 border border-gray-300 rounded-md"
+                  className="w-full p-4 border border-gray-300 rounded-md text-black"
                   required
                 />
               </div>
@@ -123,7 +123,7 @@ export default function LetsTalk() {
               <textarea
                 id="message"
                 rows="4"
-                className="w-full p-4 border border-gray-300 rounded-md"
+                className="w-full p-4 border border-gray-300 rounded-md text-black"
               ></textarea>
             </div>
 
