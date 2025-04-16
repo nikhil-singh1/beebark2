@@ -8,6 +8,9 @@ import Register from "./pages/Register";
 import Thankyou from "./components/thankyou";
 import ManifestoPage from "./pages/Manifesto";
 import TermsConditions from "./pages/terms";
+import LetsTalk from "./components/letstalk";
+import Contact from "./components/contact";
+import FloatingChatIcon from "./components/FloatingChatIcon";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -26,11 +29,15 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/LetsTalk" element={<LetsTalk />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/register" element={<Register />} />
         <Route path="/manifesto" element={<ManifestoPage />} />
         <Route path="/terms" element={<TermsConditions />} />
+      
         <Route path="/thankyou" element={<Thankyou />} />
       </Routes>
+      <FloatingChatIcon />
       </>
   );
 };
