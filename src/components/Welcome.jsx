@@ -1,22 +1,10 @@
-import React, {
-  Suspense,
-  useMemo,
-  useState,
-  useRef,
-  useEffect,
-} from "react";
+import React, { Suspense, useMemo, useState, useRef, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  OrbitControls,
-  Html,
-  Points,
-  PointMaterial,
-} from "@react-three/drei";
-import * as THREE from "three";
+import { OrbitControls, Html, Points, PointMaterial } from "@react-three/drei";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-// Generate more particles
+// Generate particles (with more particles)
 const generateParticles = (count = 80000) => {
   const positions = [];
   for (let i = 0; i < count; i++) {
@@ -77,14 +65,7 @@ const Spark = ({ show }) => {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            array={new Float32Array([
-              0,
-              0,
-              0,
-              Math.cos(angle) * len,
-              Math.sin(angle) * len,
-              0,
-            ])}
+            array={new Float32Array([0, 0, 0, Math.cos(angle) * len, Math.sin(angle) * len, 0])}
             count={2}
             itemSize={3}
           />
@@ -107,10 +88,7 @@ const Star = ({ fromLeft = true, onHit }) => {
     meshRef.current.position.x += direction * speed;
     meshRef.current.position.y -= speed;
 
-    if (
-      Math.abs(meshRef.current.position.x) < 0.1 &&
-      Math.abs(meshRef.current.position.y) < 0.1
-    ) {
+    if (Math.abs(meshRef.current.position.x) < 0.1 && Math.abs(meshRef.current.position.y) < 0.1) {
       onHit();
       meshRef.current.visible = false;
     }
@@ -158,27 +136,21 @@ const FuturisticAnimation = () => {
       style={{ backgroundColor: "#221912" }}
     >
       {inView && (
-        <div className="pointer-events-none h-full w-full">
-          <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} intensity={1.2} />
-            <Suspense fallback={null}>
-              <Particles />
-              <Star fromLeft onHit={() => setLeftHit(true)} />
-              <Star fromLeft={false} onHit={() => setRightHit(true)} />
-              <Spark show={sparkVisible} />
-              <WelcomeText show={showText} />
-            </Suspense>
-            <OrbitControls
-              enableZoom={false}
-              enablePan={false}
-              makeDefault
-              touches={{
-                ONE: THREE.TOUCH.NONE,
-                TWO: THREE.TOUCH.DOLLY_ROTATE,
-              }}
-            />
-          </Canvas>
+        <div className="h-[100vh] w-full relative">
+          <div className="absolute inset-0 pointer-events-none">
+            <Canvas style={{ pointerEvents: "none" }} camera={{ position: [0, 0, 5], fov: 75 }}>
+              <ambientLight intensity={0.5} />
+              <pointLight position={[10, 10, 10]} intensity={1.2} />
+              <Suspense fallback={null}>
+                <Particles />
+                <Star fromLeft onHit={() => setLeftHit(true)} />
+                <Star fromLeft={false} onHit={() => setRightHit(true)} />
+                <Spark show={sparkVisible} />
+                <WelcomeText show={showText} />
+              </Suspense>
+              <OrbitControls enableZoom={false} />
+            </Canvas>
+          </div>
         </div>
       )}
     </div>

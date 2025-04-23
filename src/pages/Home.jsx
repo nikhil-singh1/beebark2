@@ -10,7 +10,7 @@ import Hero2 from '../components/Hero2';
 import Scrolling from '../components/ScrollingParagraph';
 import SpecialOffer from '../components/SpecialOffer';
 import WelcomeBanner from '../components/Welcome';
-import ScrollingHighlight from '../components/Welcome';
+import FuturisticAnimation from '../components/Welcome';
 import JoinUs from '../components/joinus';
 import ReferralSection from '../components/refer';
 import ExclusiveOffer from '../components/exclusiveoffer';
@@ -18,11 +18,11 @@ import RegisterNowSection from '../components/section1';
 
 const Home = () => {
   return (
-    <main className="bg-white">
+    <main className="bg-white overflow-auto h-full">
       <Header />
       <Hero1 />
       {/* <Hero /> */}
-      <ScrollingHighlight />
+      <FuturisticAnimation />
       <Scrolling />
       <SpecialOffer />
       {/* <Highlights />
