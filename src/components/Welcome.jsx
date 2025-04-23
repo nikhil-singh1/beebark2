@@ -155,7 +155,7 @@ const FuturisticAnimation = () => {
   return (
     <div
       ref={ref}
-      className="h-[400px] md:h-screen w-full"
+      className="h-[300px] md:h-screen w-full"
       style={{ backgroundColor: "#221912" }}
     >
       {inView && (
