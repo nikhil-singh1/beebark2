@@ -1,57 +1,179 @@
-import React from "react";
+import React, {
+  Suspense,
+  useMemo,
+  useState,
+  useRef,
+  useEffect,
+} from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  OrbitControls,
+  Html,
+  Points,
+  PointMaterial,
+} from "@react-three/drei";
+import * as THREE from "three";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
-const ScrollingHighlight = () => {
+// Generate more particles
+const generateParticles = (count = 80000) => {
+  const positions = [];
+  for (let i = 0; i < count; i++) {
+    const x = (Math.random() - 0.5) * 50;
+    const y = (Math.random() - 0.5) * 50;
+    const z = (Math.random() - 0.5) * 50;
+    positions.push(x, y, z);
+  }
+  return new Float32Array(positions);
+};
+
+const Particles = () => {
+  const positions = useMemo(() => generateParticles(), []);
   return (
-    <div className="relative w-full h-48 bg-herocolor overflow-hidden flex flex-col justify-center items-center gap-4">
-      {/* First Line: Right to Left, Starts from Left */}
-      <div className="w-full overflow-hidden">
-        <div className="flex whitespace-nowrap animate-scroll-right-to-left">
-          {Array(20) // Increased repetitions to remove gaps
-            .fill("WELCOME TO THE FUTURE")
-            .map((text, index) => (
-              <span
-                key={index}
-                className="text-2xl font-bold mx-4 text-yellow-400 drop-shadow-[0_0_10px_#FFD700] animate-pulse"
-              >
-                {text}
-              </span>
-            ))}
-        </div>
-      </div>
+    <Points positions={positions} frustumCulled>
+      <PointMaterial
+        transparent
+        color="#ffffff"
+        size={0.07}
+        sizeAttenuation
+        depthWrite={false}
+      />
+    </Points>
+  );
+};
 
-      {/* Second Line: Left to Right, Starts from Left */}
-      <div className="w-full overflow-hidden">
-        <div className="flex whitespace-nowrap animate-scroll-left-to-right">
-          {Array(20)
-            .fill("WELCOME TO THE FUTURE")
-            .map((text, index) => (
-              <span
-                key={index}
-                className="text-2xl font-bold mx-4 text-yellow-400 drop-shadow-[0_0_10px_#FFD700] animate-pulse"
-              >
-                {text}
-              </span>
-            ))}
-        </div>
-      </div>
+const WelcomeText = ({ show }) => (
+  <Html center>
+    {show && (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+        className="text-yellow-400 text-6xl md:text-9xl font-extrabold text-center drop-shadow-lg"
+      >
+        Welcome to the Future
+      </motion.div>
+    )}
+  </Html>
+);
 
-      {/* Third Line: Right to Left, Starts from Left */}
-      <div className="w-full overflow-hidden">
-        <div className="flex whitespace-nowrap animate-scroll-right-to-left">
-          {Array(20)
-            .fill("WELCOME TO THE FUTURE")
-            .map((text, index) => (
-              <span
-                key={index}
-                className="text-2xl font-bold mx-4 text-yellow-400 drop-shadow-[0_0_10px_#FFD700] animate-pulse"
-              >
-                {text}
-              </span>
-            ))}
-        </div>
-      </div>
+const Spark = ({ show }) => {
+  const groupRef = useRef();
+
+  useFrame(() => {
+    if (groupRef.current && show) {
+      groupRef.current.rotation.z += 0.2;
+    }
+  });
+
+  if (!show) return null;
+
+  // More random-looking lines like a real spark
+  const sparkLines = [...Array(30)].map((_, i) => {
+    const angle = (Math.PI * 2 * i) / 30;
+    const len = Math.random() * 0.7 + 0.3;
+    return (
+      <line key={i}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            array={new Float32Array([
+              0,
+              0,
+              0,
+              Math.cos(angle) * len,
+              Math.sin(angle) * len,
+              0,
+            ])}
+            count={2}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <lineBasicMaterial color="yellow" linewidth={2} />
+      </line>
+    );
+  });
+
+  return <group ref={groupRef}>{sparkLines}</group>;
+};
+
+const Star = ({ fromLeft = true, onHit }) => {
+  const meshRef = useRef();
+  const speed = 0.05;
+
+  useFrame(() => {
+    if (!meshRef.current) return;
+    const direction = fromLeft ? 1 : -1;
+    meshRef.current.position.x += direction * speed;
+    meshRef.current.position.y -= speed;
+
+    if (
+      Math.abs(meshRef.current.position.x) < 0.1 &&
+      Math.abs(meshRef.current.position.y) < 0.1
+    ) {
+      onHit();
+      meshRef.current.visible = false;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef} position={[fromLeft ? -3 : 3, 3, 0]}>
+      <sphereGeometry args={[0.45, 64, 64]} />
+      <meshStandardMaterial emissive="yellow" color="yellow" />
+    </mesh>
+  );
+};
+
+const FuturisticAnimation = () => {
+  const [leftHit, setLeftHit] = useState(false);
+  const [rightHit, setRightHit] = useState(false);
+  const [showText, setShowText] = useState(false);
+  const [sparkVisible, setSparkVisible] = useState(false);
+
+  const { ref, inView } = useInView({ threshold: 0.2 });
+
+  useEffect(() => {
+    if (inView) {
+      setLeftHit(false);
+      setRightHit(false);
+      setShowText(false);
+      setSparkVisible(false);
+    }
+  }, [inView]);
+
+  useEffect(() => {
+    if (leftHit && rightHit) {
+      setSparkVisible(true);
+      setTimeout(() => {
+        setSparkVisible(false);
+        setShowText(true);
+      }, 1000);
+    }
+  }, [leftHit, rightHit]);
+
+  return (
+    <div
+      ref={ref}
+      className="h-[400px] md:h-screen w-full"
+      style={{ backgroundColor: "#221912" }}
+    >
+      {inView && (
+        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={1.2} />
+          <Suspense fallback={null}>
+            <Particles />
+            <Star fromLeft onHit={() => setLeftHit(true)} />
+            <Star fromLeft={false} onHit={() => setRightHit(true)} />
+            <Spark show={sparkVisible} />
+            <WelcomeText show={showText} />
+          </Suspense>
+          <OrbitControls enableZoom={false} />
+        </Canvas>
+      )}
     </div>
   );
 };
 
-export default ScrollingHighlight;
+export default FuturisticAnimation;
