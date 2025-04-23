@@ -69,7 +69,6 @@ const Spark = ({ show }) => {
 
   if (!show) return null;
 
-  // More random-looking lines like a real spark
   const sparkLines = [...Array(30)].map((_, i) => {
     const angle = (Math.PI * 2 * i) / 30;
     const len = Math.random() * 0.7 + 0.3;
@@ -159,18 +158,28 @@ const FuturisticAnimation = () => {
       style={{ backgroundColor: "#221912" }}
     >
       {inView && (
-        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1.2} />
-          <Suspense fallback={null}>
-            <Particles />
-            <Star fromLeft onHit={() => setLeftHit(true)} />
-            <Star fromLeft={false} onHit={() => setRightHit(true)} />
-            <Spark show={sparkVisible} />
-            <WelcomeText show={showText} />
-          </Suspense>
-          <OrbitControls enableZoom={false} />
-        </Canvas>
+        <div className="pointer-events-none h-full w-full">
+          <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+            <ambientLight intensity={0.5} />
+            <pointLight position={[10, 10, 10]} intensity={1.2} />
+            <Suspense fallback={null}>
+              <Particles />
+              <Star fromLeft onHit={() => setLeftHit(true)} />
+              <Star fromLeft={false} onHit={() => setRightHit(true)} />
+              <Spark show={sparkVisible} />
+              <WelcomeText show={showText} />
+            </Suspense>
+            <OrbitControls
+              enableZoom={false}
+              enablePan={false}
+              makeDefault
+              touches={{
+                ONE: THREE.TOUCH.NONE,
+                TWO: THREE.TOUCH.DOLLY_ROTATE,
+              }}
+            />
+          </Canvas>
+        </div>
       )}
     </div>
   );
