@@ -69,7 +69,7 @@ const Hero1 = () => {
   }, [setRightLogoSpring, setLeftLogoSpring, isMobile]);
 
   return (
-    <section className="w-full h-[450px] md:h-screen bg-white flex items-center justify-center relative overflow-hidden">
+    <section className="w-full h-[380px] md:h-screen bg-white flex items-center justify-center relative overflow-hidden">
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
 
       {/* Logos */}
