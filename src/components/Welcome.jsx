@@ -1,188 +1,90 @@
-import React, {
-  Suspense,
-  useMemo,
-  useState,
-  useRef,
-  useEffect,
-} from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  OrbitControls,
-  Html,
-  Points,
-  PointMaterial,
-} from "@react-three/drei";
-import * as THREE from "three";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React, { useEffect, useState } from "react";
 
-// Generate more particles
-const generateParticles = (count = 80000) => {
-  const positions = [];
-  for (let i = 0; i < count; i++) {
-    const x = (Math.random() - 0.5) * 50;
-    const y = (Math.random() - 0.5) * 50;
-    const z = (Math.random() - 0.5) * 50;
-    positions.push(x, y, z);
-  }
-  return new Float32Array(positions);
-};
+const FuturisticTimer = () => {
+  const [timeLeft, setTimeLeft] = useState({
+    months: 0,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    milliseconds: 0,
+  });
 
-const Particles = () => {
-  const positions = useMemo(() => generateParticles(), []);
-  return (
-    <Points positions={positions} frustumCulled>
-      <PointMaterial
-        transparent
-        color="#ffffff"
-        size={0.07}
-        sizeAttenuation
-        depthWrite={false}
-      />
-    </Points>
-  );
-};
+  // Set the target date to August 20, 2025, 23:59:59.999 IST
+  const targetDate = new Date("2025-08-20T23:59:59.999+05:30");  // IST is UTC+5:30
 
-const WelcomeText = ({ show }) => (
-  <Html center>
-    {show && (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-        className="text-yellow-400 text-6xl md:text-9xl font-extrabold text-center drop-shadow-lg"
-      >
-        Welcome to the Future
-      </motion.div>
-    )}
-  </Html>
-);
+  const calculateTimeLeft = () => {
+    const now = new Date();
+    const total = targetDate - now;
 
-const Spark = ({ show }) => {
-  const groupRef = useRef();
-
-  useFrame(() => {
-    if (groupRef.current && show) {
-      groupRef.current.rotation.z += 0.2;
+    if (total <= 0) {
+      return {
+        months: 0,
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        milliseconds: 0,
+      };
     }
-  });
 
-  if (!show) return null;
+    const millisecondsInMonth = 30 * 24 * 60 * 60 * 1000;
+    const months = Math.floor(total / millisecondsInMonth);
+    const remaining = total % millisecondsInMonth;
 
-  const sparkLines = [...Array(30)].map((_, i) => {
-    const angle = (Math.PI * 2 * i) / 30;
-    const len = Math.random() * 0.7 + 0.3;
-    return (
-      <line key={i}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            array={new Float32Array([
-              0,
-              0,
-              0,
-              Math.cos(angle) * len,
-              Math.sin(angle) * len,
-              0,
-            ])}
-            count={2}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        <lineBasicMaterial color="yellow" linewidth={2} />
-      </line>
-    );
-  });
+    const days = Math.floor(remaining / (24 * 60 * 60 * 1000));
+    const hours = Math.floor((remaining / (60 * 60 * 1000)) % 24);
+    const minutes = Math.floor((remaining / (60 * 1000)) % 60);
+    const seconds = Math.floor((remaining / 1000) % 60);
+    const milliseconds = Math.floor(remaining % 1000);
 
-  return <group ref={groupRef}>{sparkLines}</group>;
-};
-
-const Star = ({ fromLeft = true, onHit }) => {
-  const meshRef = useRef();
-  const speed = 0.05;
-
-  useFrame(() => {
-    if (!meshRef.current) return;
-    const direction = fromLeft ? 1 : -1;
-    meshRef.current.position.x += direction * speed;
-    meshRef.current.position.y -= speed;
-
-    if (
-      Math.abs(meshRef.current.position.x) < 0.1 &&
-      Math.abs(meshRef.current.position.y) < 0.1
-    ) {
-      onHit();
-      meshRef.current.visible = false;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} position={[fromLeft ? -3 : 3, 3, 0]}>
-      <sphereGeometry args={[0.45, 64, 64]} />
-      <meshStandardMaterial emissive="yellow" color="yellow" />
-    </mesh>
-  );
-};
-
-const FuturisticAnimation = () => {
-  const [leftHit, setLeftHit] = useState(false);
-  const [rightHit, setRightHit] = useState(false);
-  const [showText, setShowText] = useState(false);
-  const [sparkVisible, setSparkVisible] = useState(false);
-
-  const { ref, inView } = useInView({ threshold: 0.2 });
+    return { months, days, hours, minutes, seconds, milliseconds };
+  };
 
   useEffect(() => {
-    if (inView) {
-      setLeftHit(false);
-      setRightHit(false);
-      setShowText(false);
-      setSparkVisible(false);
-    }
-  }, [inView]);
-
-  useEffect(() => {
-    if (leftHit && rightHit) {
-      setSparkVisible(true);
-      setTimeout(() => {
-        setSparkVisible(false);
-        setShowText(true);
-      }, 1000);
-    }
-  }, [leftHit, rightHit]);
+    const interval = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div
-      ref={ref}
-      className="h-[300px] md:h-screen w-full"
-      style={{ backgroundColor: "#221912" }}
+      className="relative w-full h-[500px] flex items-center justify-center font-[Montserrat]"
+      style={{
+        backgroundImage: `url("/timer.jpeg")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center top -500px",
+      }}
     >
-      {inView && (
-        <div className="pointer-events-none h-full w-full">
-          <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} intensity={1.2} />
-            <Suspense fallback={null}>
-              <Particles />
-              <Star fromLeft onHit={() => setLeftHit(true)} />
-              <Star fromLeft={false} onHit={() => setRightHit(true)} />
-              <Spark show={sparkVisible} />
-              <WelcomeText show={showText} />
-            </Suspense>
-            <OrbitControls
-              enableZoom={false}
-              enablePan={false}
-              makeDefault
-              touches={{
-                ONE: THREE.TOUCH.NONE,
-                TWO: THREE.TOUCH.DOLLY_ROTATE,
-              }}
-            />
-          </Canvas>
-        </div>
-      )}
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+
+      {/* Timer Display shifted upward */}
+      <div className="relative z-10 text-white text-[2rem] sm:text-[2.8rem] md:text-[3.5rem] font-extrabold text-center flex flex-wrap justify-center gap-6 px-6 mt-[-80px]">
+        {[ 
+          { label: "Months", value: timeLeft.months },
+          { label: "Days", value: timeLeft.days },
+          { label: "Hours", value: timeLeft.hours },
+          { label: "Minutes", value: timeLeft.minutes },
+          { label: "Seconds", value: timeLeft.seconds },
+          { label: "Milliseconds", value: timeLeft.milliseconds },
+        ].map((item, index) => (
+          <div
+            key={index}
+            className="bg-blue-800/90 px-8 py-6 rounded-2xl shadow-2xl text-center min-w-[140px]"
+          >
+            <div className="text-white">
+              {String(item.value).padStart(item.label === "Milliseconds" ? 3 : 2, "0")}
+            </div>
+            <div className="text-sm md:text-lg mt-1 font-medium opacity-85 tracking-wide">
+              {item.label}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default FuturisticAnimation;
+export default FuturisticTimer;

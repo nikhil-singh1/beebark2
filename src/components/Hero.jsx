@@ -1,117 +1,103 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useSpring, animated } from "@react-spring/web";
+import React, { useState, useRef, useEffect } from "react";
+import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
 
-const Hero = () => {
-  const canvasRef = useRef(null);
-  const totalFrames = 64;
-  const [images, setImages] = useState([]);
+export default function HeroSection() {
+  const [isMuted, setIsMuted] = useState(true);
+  const [isInView, setIsInView] = useState(false); // To track if the video is in view
+  const videoRef = useRef(null); // Reference to the video element
+  const navigate = useNavigate(); // Initialize the navigate function
 
-  const preloadImages = () => {
-    const loadedImages = [];
-    for (let i = 1; i <= totalFrames; i++) {
-      const img = new Image();
-      img.src = `/path/to/frames/frame_${String(i).padStart(4, "0")}.png`;
-      loadedImages.push(img);
-    }
-    setImages(loadedImages);
+  // Toggle mute/unmute
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
   };
 
-  const renderFrame = (index) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const context = canvas.getContext("2d");
-    const img = images[index];
-    if (img && context) {
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(img, 0, 0, canvas.width, canvas.height);
-    }
+  // Handle "Learn More" button click
+  const handleLearnMore = () => {
+    navigate("/other-page"); // Example: Navigating to '/other-page'
   };
 
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollFraction = scrollTop / maxScrollTop;
-    const frameIndex = Math.min(totalFrames - 1, Math.floor(scrollFraction * totalFrames));
-    renderFrame(frameIndex);
-  };
-
+  // Handle intersection observer for lazy loading the video
   useEffect(() => {
-    preloadImages();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          if (videoRef.current) {
+            videoRef.current.play(); // Play video when in view
+          }
+        } else {
+          setIsInView(false);
+          if (videoRef.current) {
+            videoRef.current.pause(); // Pause video when out of view
+          }
+        }
+      },
+      { threshold: 0.5 } // Trigger when 50% of the video is in the viewport
+    );
+
+    // Observe the video element
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    // Cleanup the observer
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
   }, []);
 
-  const [springLeftImage, setSpringLeftImage] = useSpring(() => ({
-    transform: "translateX(0px)",
-    opacity: 1,
-    config: { tension: 400, friction: 20 },
-  }));
-
-  const [springRightImage, setSpringRightImage] = useSpring(() => ({
-    transform: "translateX(0px)",
-    opacity: 1,
-    config: { tension: 400, friction: 20 },
-  }));
-
-  const [springText, setSpringText] = useSpring(() => ({
-    opacity: 0,
-    transform: "scale(0.5)",
-    config: { tension: 200, friction: 25 },
-  }));
-
-  useEffect(() => {
-    const handleScrollAnimation = () => {
-      const scrollTop = window.scrollY;
-      const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollFraction = scrollTop / maxScrollTop;
-
-      setSpringLeftImage({
-        transform: `translateX(-${scrollFraction * 5600}px)`,
-        opacity: 1 - scrollFraction * 0.5,
-      });
-
-      setSpringRightImage({
-        transform: `translateX(${scrollFraction *  5600}px)`,
-        opacity: 1 - scrollFraction * 0.5,
-      });
-
-      setSpringText({
-        opacity: Math.min(1, scrollFraction * 2),
-        transform: `scale(${0.9 + scrollFraction * 0.5})`,
-      });
-    };
-
-    window.addEventListener("scroll", handleScrollAnimation);
-    return () => window.removeEventListener("scroll", handleScrollAnimation);
-  }, [setSpringLeftImage, setSpringRightImage, setSpringText]);
-
   return (
-    <section className="w-full h-screen bg-white relative flex flex-col items-center justify-center">
-      <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
-
-      <animated.h1
-        className="absolute text-black font-bold text-[7vw] sm:text-[8vw] md:text-[10vw] z-0"
-        style={springText}
+    <div
+      className="relative w-full h-[450px] md:h-[600px] overflow-hidden"
+    
+    >
+      {/* Video Background */}
+      <video
+        ref={videoRef} // Reference to the video element
+        className="absolute inset-0 w-full h-full object-cover"
+        muted={isMuted}
+        loop
+        playsInline
+        // The autoPlay is not needed here as we manually control it
       >
-        BeeBark
-      </animated.h1>
+        <source src="video.mp4" type="video/mp4" />
+        <source src="video.webm" type="video/webm" />
+        {/* Fallback Message */}
+        Your browser does not support the video tag.
+      </video>
 
-      <div className="absolute inset-0 flex items-center justify-center gap-8">
-        <animated.img
-          src="bbark.png"
-          alt="Left"
-          className="w-[40%] max-w-[300px] z-10"
-          style={springLeftImage}
-        />
-        <animated.img
-          src="bbark_1.png"
-          alt="Right"
-          className="w-[40%] max-w-[300px] z-10"
-          style={springRightImage}
-        />
+      {/* Bottom-Left Text and Button */}
+      <div className="absolute bottom-16 left-8 p-6 rounded-xl max-w-md">
+        <div className="text-lg md:text-[32px] text-white font-semibold mb-4 leading-relaxed">
+          The future belongs to those who believe in the beauty of their dreams.
+        </div>
+        <button
+          className="px-6 py-3 border-2 border-yellow-500 text-white text-sm md:text-xl font-semibold rounded-lg shadow-lg hover:bg-yellow-500 hover:text-white transition-all md:px-12"
+          onClick={handleLearnMore}
+        >
+          Learn More
+        </button>
       </div>
-    </section>
-  );
-};
 
-export default Hero;
+      {/* Mute/Unmute Button */}
+      <div className="absolute bottom-5 right-5 bg-black bg-opacity-50 p-2 rounded-full cursor-pointer z-10">
+        {isMuted ? (
+          <SpeakerXMarkIcon
+            className="w-6 h-6 md:w-8 md:h-8 text-white"
+            onClick={toggleMute}
+          />
+        ) : (
+          <SpeakerWaveIcon
+            className="w-6 h-6 md:w-8 md:h-8 text-white"
+            onClick={toggleMute}
+          />
+        )}
+      </div>
+    </div>
+  );
+}

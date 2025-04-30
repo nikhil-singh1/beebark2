@@ -69,7 +69,7 @@ const Hero1 = () => {
   }, [setRightLogoSpring, setLeftLogoSpring, isMobile]);
 
   return (
-    <section className="w-full h-[420px] md:h-screen bg-white flex items-center justify-center relative overflow-hidden">
+    <section className="w-full h-screen bg-white flex items-center justify-center relative overflow-hidden">
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
 
       {/* Logos */}
@@ -100,7 +100,7 @@ const Hero1 = () => {
       </div>
 
       {/* Animated Tagline */}
-      <div className="absolute left-[30%] md:left-[35%] top-[58%] md:top-[65%] flex gap-2 text-[4vw] md:text-[3vw] font-medium text-gray-600 z-20">
+      <div className="absolute left-[30%] md:left-[35%] top-[51%] md:top-[65%] flex gap-2 text-[4vw] md:text-[3vw] font-medium text-gray-600 z-20">
         {taglineTrail.map((props, index) => (
           <animated.span key={index} style={props}>
             {tagline[index]}

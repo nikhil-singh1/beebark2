@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 
 import Home from "./pages/Home";
@@ -11,34 +11,60 @@ import TermsConditions from "./pages/terms";
 import LetsTalk from "./components/letstalk";
 import Contact from "./components/contact";
 import FloatingChatIcon from "./components/FloatingChatIcon";
+import LoadingPage from "./components/Loading";
+import VerifyEmail from "./pages/verify-email";
+import ProfileSetup from "./pages/ProfileSetup";
+import HoneycombReveal from "./components/section2";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;
 };
 
+const AppRoutes = () => (
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/admin" element={<AdminLogin />} />
+    <Route path="/LetsTalk" element={<LetsTalk />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/register" element={<Register />} />
+    <Route path="/manifesto" element={<ManifestoPage />} />
+    <Route path="/terms" element={<TermsConditions />} />
+    <Route path="/verify-email" element={<VerifyEmail />} />
+    <Route path="/profile-setup" element={<ProfileSetup />} />
+    <Route path="/thankyou" element={<Thankyou />} />
+    <Route path="/section2" element={<HoneycombReveal />} />
+
+  </Routes>
+);
+
 const App = () => {
+  const [loading, setLoading] = useState(() => {
+    // This runs only once (on first render)
+    return sessionStorage.getItem("hasLoaded") !== "true";
+  });
+
+  useLayoutEffect(() => {
+    if (loading) {
+      const timeout = setTimeout(() => {
+        setLoading(false);
+        sessionStorage.setItem("hasLoaded", "true");
+      }, 8000);
+      return () => clearTimeout(timeout);
+    }
+  }, [loading]);
+
   return (
-      <>
-      <ScrollToTop /> {/* Ensures scrolling to top on route change */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/LetsTalk" element={<LetsTalk />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/manifesto" element={<ManifestoPage />} />
-        <Route path="/terms" element={<TermsConditions />} />
-      
-        <Route path="/thankyou" element={<Thankyou />} />
-      </Routes>
+    <>
+      <ScrollToTop />
+      {loading ? <LoadingPage /> : <AppRoutes />}
       <FloatingChatIcon />
-      </>
+    </>
   );
 };
 

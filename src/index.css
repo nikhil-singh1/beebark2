@@ -163,3 +163,34 @@ canvas {
   color: black;
   margin-right: 8px;
 }
+
+
+.clip-hexagon {
+  clip-path: polygon(
+    25% 0%,
+    75% 0%,
+    100% 50%,
+    75% 100%,
+    25% 100%,
+    0% 50%
+  );
+}
+
+.clip-path-hexagon {
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+}
+
+@keyframes particle {
+  0% {
+    transform: translate(var(--final-x), var(--final-y));
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+.animate-particle {
+  animation: particle 1.5s ease-out forwards;
+}

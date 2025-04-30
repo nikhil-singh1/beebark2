@@ -17,6 +17,7 @@
     "@react-three/fiber": "^8.15.19",
     "@sentry/react": "^7.106.0",
     "@sentry/vite-plugin": "^2.14.3",
+    "axios": "^1.9.0",
     "framer-motion": "^12.4.7",
     "gsap": "^3.12.5",
     "lucide-react": "^0.477.0",

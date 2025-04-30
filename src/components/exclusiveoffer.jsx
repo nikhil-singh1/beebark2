@@ -45,17 +45,7 @@ const ExclusiveOffer = () => {
       </h2>
       <div className="flex flex-col md:flex-row justify-center items-center gap-10">
         {/* First Card */}
-        <div className="flex flex-col items-center text-center max-w-[300px] w-full">
-          <div className="bg-white p-4 rounded-full shadow-md">
-            <img src="/registration.png" alt="Register" className="w-16 h-16 object-contain" />
-          </div>
-          <div className="md:mt-4 md:px-2">
-            <h3 className="font-bold text-black">Register for Free</h3>
-            <p className="text-black">on our platform</p>
-          </div>
-        </div>
-
-        {/* Second Card */}
+  
         <div className="flex flex-col items-center text-center max-w-[300px] w-full ">
           <div className="bg-white p-4 rounded-full shadow-md">
             <img src="/marketing.png" alt="Marketing" className="w-16 h-16 object-contain" />
@@ -67,6 +57,18 @@ const ExclusiveOffer = () => {
             <p className="text-black">
               at just <span className="underline decoration-green-500">₹35,000/per month</span> for next 6 months to supercharge your online growth.
             </p>
+          </div>
+        </div>
+
+
+         {/* Second Card */}
+        <div className="flex flex-col items-center text-center max-w-[300px] w-full">
+          <div className="bg-white p-4 rounded-full shadow-md">
+            <img src="/registration.png" alt="Register" className="w-16 h-16 object-contain" />
+          </div>
+          <div className="md:mt-4 md:px-2">
+            <h3 className="font-bold text-black">Register for Free</h3>
+            <p className="text-black">on our platform</p>
           </div>
         </div>
 
