@@ -38,7 +38,7 @@ const AppRoutes = () => (
     <Route path="/verify-email" element={<VerifyEmail />} />
     <Route path="/profile-setup" element={<ProfileSetup />} />
     <Route path="/thankyou" element={<Thankyou />} />
-    <Route path="/section2" element={<HoneycombReveal />} />
+
 
   </Routes>
 );
