@@ -12,10 +12,13 @@ import LetsTalk from "./components/letstalk";
 import Contact from "./components/contact";
 import FloatingChatIcon from "./components/FloatingChatIcon";
 import LoadingPage from "./components/Loading";
-import VerifyEmail from "./pages/verify-email";
 import ProfileSetup from "./pages/ProfileSetup";
 import HoneycombReveal from "./components/section2";
-
+import AdminLoginPage from "./pages/AdminLoginPage";
+import AdminDashboard from "./components/AdminDashboard";
+import Login from "./pages/Login";
+import { AuthProvider } from './context/AuthContext.jsx';
+import VerifyOtp from "./pages/VerifyEmail.jsx";
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -27,6 +30,7 @@ const ScrollToTop = () => {
 };
 
 const AppRoutes = () => (
+<AuthProvider>
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/admin" element={<AdminLogin />} />
@@ -35,12 +39,15 @@ const AppRoutes = () => (
     <Route path="/register" element={<Register />} />
     <Route path="/manifesto" element={<ManifestoPage />} />
     <Route path="/terms" element={<TermsConditions />} />
-    <Route path="/verify-email" element={<VerifyEmail />} />
-    <Route path="/profile-setup" element={<ProfileSetup />} />
+    <Route path="/users/:userId" element={<ProfileSetup />} />
     <Route path="/thankyou" element={<Thankyou />} />
-
+    <Route path="/admin/dashboard" element={<AdminDashboard />}/>
+    <Route path="/login" element={<Login/>}/>
+    <Route path="/verify-otp"  element={<VerifyOtp/>} />
+    {/* <Route path="/users/:userId" element={<VerifyOtp/>}  /> */}
 
   </Routes>
+  </AuthProvider>
 );
 
 const App = () => {

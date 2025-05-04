@@ -1,103 +1,125 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { CheckCircle, Phone, Briefcase, MapPin, FileText, Eye, EyeOff } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
 
 const JoinUs = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState(location.state?.email || "");
   const [password, setPassword] = useState("");
-  const [businessName, setBusinessName] = useState("");
+  const [name, setName] = useState("");
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
   const [phone, setPhone] = useState("");
   const [category, setCategory] = useState("");
   const [otherCategory, setOtherCategory] = useState("");
   const [agree, setAgree] = useState(false);
   const [countryCode, setCountryCode] = useState("+91");
-  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!agree) {
-      alert("You must agree to the terms and conditions.");
+      toast.error("You must agree to the terms and conditions.");
       return;
     }
-  
+
+    setLoading(true);
+
     const businessData = {
-      businessName,
+      firstname,
+      lastname,
+      name,
       email,
       password,
       phone,
       countryCode,
       category,
-      otherCategory: category === "others" ? otherCategory : "", // Only send if "Others" is selected
+      otherCategory: category === "others" ? otherCategory : "",
     };
-  
+
     try {
-      const response = await fetch("https://beebark-backend1.vercel.app/api/business/register", {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(businessData),
       });
-  
+
       const data = await response.json();
-  
-      if (!response.ok) {
-        throw new Error(data.message || "Something went wrong");
-      }
-  
-      alert("Registration Successful! You can now log in.");
-      navigate("/thankyou"); // Redirecting after successful registration
+
+      if (!response.ok) throw new Error(data.message || "Something went wrong");
+
+      toast.success("Registration successful!");
+      navigate("/verify-otp", { state: { email } });
     } catch (error) {
-      console.error("Error:", error);
-      alert(error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
-  
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-6 sm:px-8 font-poppins mt-24">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-8 sm:p-10 flex flex-col sm:flex-row space-y-6 sm:space-y-0">
-        {/* Left side: Form */}
         <div className="w-full sm:w-1/2 space-y-6">
-          <span className="text-3xl font-bold text-herocolor text-left">
-            Join TheBeeBark
-          </span>
-          <span className="text-3xl font-bold text-yellow-500"> PRO</span>
-          <p className="text-left text-gray-600 text-lg">
-            Unlock TheBeeBark <span className="text-yellow-500"> PRO! </span>Complete your profile to start using TheBeeBark<span className="text-yellow-500"> PRO! </span>today.
+          <h2 className="text-3xl font-bold text-herocolor">
+            Join TheBeeBark <span className="text-yellow-500">PRO</span>
+          </h2>
+          <p className="text-gray-600 text-lg">
+            Unlock TheBeeBark <span className="text-yellow-500">PRO!</span> Complete your profile to start using it today.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email Input */}
+            {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-600">
-                Email Address
-              </label>
+
+            <div className="flex items-center space-x-4">
+              <div className="w-2/3">
+                <label className="block text-sm font-medium text-gray-600">First Name</label>
+                <input
+                type="text"
+                value={firstname}
+                onChange={(e) => setfirstname(e.target.value)}
+                className="mt-2 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
+                required
+              />
+              </div>
+              <div className="w-2/3">
+                <label className="block text-sm font-medium text-gray-600">Last Name</label>
+                <input
+                  type="text"
+                  value={lastname}
+                  onChange={(e) => setlastname(e.target.value)}
+                  className="mt-2 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
+                  required
+                />
+              </div>
+            </div>
+              <label className="block text-sm font-medium text-gray-600">Email Address</label>
               <input
                 type="email"
-                id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
+                className="mt-2 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                 required
               />
             </div>
 
-            {/* Password Input */}
+            {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-600">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-gray-600">Password</label>
               <div className="relative">
                 <input
-                  type={showPassword ? "text" : "password"} // Toggle between text and password
-                  id="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
+                  className="mt-2 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                   required
                 />
                 <button
@@ -110,31 +132,25 @@ const JoinUs = () => {
               </div>
             </div>
 
-            {/* Business Name */}
+            {/* Name */}
             <div>
-              <label htmlFor="businessName" className="block text-sm font-medium text-gray-600">
-                Business Name
-              </label>
+              <label className="block text-sm font-medium text-gray-600">Business Name</label>
               <input
                 type="text"
-                id="businessName"
-                value={businessName}
-                onChange={(e) => setBusinessName(e.target.value)}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="mt-2 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                 required
               />
             </div>
 
-            {/* Professional Category Dropdown */}
+            {/* Category */}
             <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-600">
-                Professional Category
-              </label>
+              <label className="block text-sm font-medium text-gray-600">Professional Category</label>
               <select
-                id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
+                className="mt-2 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                 required
               >
                 <option value="">Select Category</option>
@@ -146,38 +162,31 @@ const JoinUs = () => {
               </select>
             </div>
 
-            {/* Additional input for "Others" category */}
+            {/* Other Category */}
             {category === "others" && (
               <div>
-                <label htmlFor="otherCategory" className="block text-sm font-medium text-gray-600">
-                  Please specify
-                </label>
+                <label className="block text-sm font-medium text-gray-600">Please specify</label>
                 <input
                   type="text"
-                  id="otherCategory"
                   value={otherCategory}
                   onChange={(e) => setOtherCategory(e.target.value)}
-                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
+                  className="mt-2 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                   required
                 />
               </div>
             )}
 
-            {/* Business Phone Number with Country Code */}
+            {/* Country Code and Phone */}
             <div className="flex items-center space-x-4">
-              <div className="w-1/4">
-                <label htmlFor="countryCode" className="block text-sm font-medium text-gray-600">
-                  Country Code
-                </label>
+              <div className="w-1/3">
+                <label className="block text-sm font-medium text-gray-600">Code</label>
                 <select
-                  id="countryCode"
                   value={countryCode}
                   onChange={(e) => setCountryCode(e.target.value)}
-                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
+                  className="mt-2 w-full px-2 py-2 border rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                   required
                 >
-                  {/* Country options */}
-                  <option value="+91">+91 (India)</option>
+                     <option value="+91">+91 (India)</option>
                 <option value="+1">+1 (US, Canada, etc.)</option>
                 <option value="+44">+44 (UK)</option>
                 <option value="+61">+61 (Australia)</option>
@@ -231,70 +240,44 @@ const JoinUs = () => {
                  
                 </select>
               </div>
-              <div className="w-3/4">
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-600">
-                  Business Phone Number
-                </label>
+              <div className="w-2/3">
+                <label className="block text-sm font-medium text-gray-600">Phone</label>
                 <input
                   type="tel"
-                  id="phone"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
+                  className="mt-2 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none text-gray-600"
                   required
                 />
               </div>
             </div>
 
-            {/* Agree Checkbox */}
-            <div className="flex items-center">
+            {/* Agree to Terms */}
+            <div className="flex items-start">
               <input
                 type="checkbox"
-                id="agree"
                 checked={agree}
-                onChange={() => setAgree(!agree)}
-                className="h-4 w-4 text-yellow-500 border-gray-300 rounded"
-                required
+                onChange={(e) => setAgree(e.target.checked)}
+                className="mt-1 mr-2"
               />
-              <label htmlFor="agree" className="ml-2 text-sm text-gray-600">
-                I agree to the{" "}
-                <a href="/terms" className="text-yellow-500 hover:text-yellow-400">
-                  Terms and Conditions
-                </a>{" "}
-                {/* and{" "}
-                <a href="/privacy" className="text-yellow-500 hover:text-yellow-400">
-                  Privacy Policy
-                </a> */}
-                .
+              <label className="text-sm text-gray-600">
+                I agree to the <span className="text-yellow-500 font-medium">Terms and Conditions</span>
               </label>
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full py-2 bg-yellow-500 text-white font-semibold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-herocolor"
+              disabled={loading}
+              className={`w-full py-2 px-4 rounded-md text-white transition ${
+                loading
+                  ? "bg-yellow-300 cursor-not-allowed"
+                  : "bg-yellow-500 hover:bg-yellow-600"
+              }`}
             >
-              Submit
+              {loading ? "Registering..." : "Register"}
             </button>
           </form>
-        </div>
-
-        {/* Right side: Benefits with Icons */}
-        <div className="w-full sm:w-1/2 space-y-8 pt-8 sm:pt-0 sm:pl-8">
-          <div className="space-y-6">
-            {[
-              { Icon: CheckCircle, text: "Your Pro directory profile is how potential clients find you on TheBeeBark." },
-              { Icon: Briefcase, text: "Include your business name, and it will appear in TheBeeBark PRO directory search results." },
-              { Icon: MapPin, text: "Choose the business type that best fits your business to target the right clients." },
-              { Icon: Phone, text: "Provide your phone number for clients to contact you directly from your Pro directory profile." },
-              { Icon: FileText, text: "Complete your profile to start showcasing your services and get more clients." },
-            ].map(({ Icon, text }, index) => (
-              <div key={index} className="flex items-start space-x-6">
-                <Icon className="h-7 w-7 text-yellow-500" />
-                <p className="text-base text-herocolor">{text}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>

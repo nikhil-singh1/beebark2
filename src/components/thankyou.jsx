@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 const Thankyou = () => {
+
+  const navigate = useNavigate();
+
+  const handleLoginRedirect = () => {
+    navigate('/login');
+  };
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden w-120">
@@ -18,9 +25,12 @@ const Thankyou = () => {
             Thank you for subscribing to Beebark! We're so excited to welcome
             you as a Beebark Premium user.
           </p>
-          <button className="bg-yellow-400 text-black font-semibold py-2 px-4 rounded-full w-full hover:bg-yellow-500">
-            Confirm Email
-          </button>
+          <button
+      onClick={handleLoginRedirect}
+      className="bg-yellow-400 text-black font-semibold py-2 px-4 rounded-full w-full hover:bg-yellow-500"
+    >
+      You have confirmed your email, Now Login
+    </button>
         </div>
         <div className="bg-black text-center py-4">
           <p className="text-white text-sm">Follow us on:</p>
