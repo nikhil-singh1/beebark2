@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
+import { AuthContext } from "../context/AuthContext"; // Import your AuthContext
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,24 +10,30 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { setToken, setUserData } = useContext(AuthContext); // Access context values
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/auth/login", {
+      const { data } = await axios.post("https://beebark-backend-2.vercel.app/api/auth/login", {
         email,
         password,
         rememberMe,
       });
 
       localStorage.setItem("userToken", data.token);
-      if (rememberMe) {
+
+      if (data.user) {
         localStorage.setItem("userDetails", JSON.stringify(data.user));
+        setUserData(data.user); // Update AuthContext user data
       }
 
-      alert(data.message);
-      navigate(`/users/${data.user._id}`); // ✅ Redirect using user ID
+      setToken(data.token); // Update AuthContext token state
+
+      alert(data.message || "Login successful"); // Use message from backend or default
+      navigate(`/users/${data.user?._id || data.userId}`); // Redirect using user ID (handle potential undefined)
+
     } catch (error) {
       console.error("Error logging in:", error.response?.data?.message || error.message);
       alert(error.response?.data?.message || "Error logging in");

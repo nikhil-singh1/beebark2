@@ -71,19 +71,6 @@ export default function HeroSection() {
         Your browser does not support the video tag.
       </video>
 
-      {/* Bottom-Left Text and Button */}
-      <div className="absolute bottom-16 left-8 p-6 rounded-xl max-w-md">
-        <div className="text-lg md:text-[32px] text-white font-semibold mb-4 leading-relaxed">
-          The future belongs to those who believe in the beauty of their dreams.
-        </div>
-        <button
-          className="px-6 py-3 border-2 border-yellow-500 text-white text-sm md:text-xl font-semibold rounded-lg shadow-lg hover:bg-yellow-500 hover:text-white transition-all md:px-12"
-          onClick={handleLearnMore}
-        >
-          Learn More
-        </button>
-      </div>
-
       {/* Mute/Unmute Button */}
       <div className="absolute bottom-5 right-5 bg-black bg-opacity-50 p-2 rounded-full cursor-pointer z-10">
         {isMuted ? (
