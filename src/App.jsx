@@ -15,6 +15,7 @@ import ProfileSetup from "./pages/ProfileSetup";
 import Login from "./pages/Login";
 import { AuthProvider } from './context/AuthContext.jsx';
 import VerifyOtp from "./pages/VerifyEmail.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -38,6 +39,7 @@ const AppRoutes = () => (
 
     <Route path="/login" element={<Login/>}/>
     <Route path="/verify-otp"  element={<VerifyOtp/>} />
+    <Route path="/forgot-password"  element={<ForgotPassword/>} />
     {/* <Route path="/users/:userId" element={<VerifyOtp/>}  /> */}
 
   </Routes>

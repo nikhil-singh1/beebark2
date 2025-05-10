@@ -5,6 +5,7 @@ const VerifyOtp = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const email = location.state?.email || "";
+  const firstname = location.state?.firstname | "";
 
   const [otp, setOtp] = useState("");
 
@@ -21,7 +22,7 @@ const VerifyOtp = () => {
       if (!response.ok) throw new Error(data.message || "Verification failed");
 
       alert("OTP Verified Successfully!");
-      navigate("/thankyou");
+      navigate("/thankyou", { state: { firstname } });
     } catch (err) {
       alert(err.message);
     }
@@ -33,8 +34,12 @@ const VerifyOtp = () => {
         <h2 className="text-2xl font-bold text-center text-yellow-600 mb-4">
           Verify OTP
         </h2>
-        <p className="text-center text-gray-600 mb-4">
-          An OTP has been sent to <strong>{email}</strong>
+        <p className="text-center text-gray-600 mb-1">
+          An OTP has been sent to <strong>{email}.
+          </strong>
+        </p>
+        <p className="text-center text-yellow-600 mb-4">
+        Please check your Spam or Junk folder if you haven't received the email.
         </p>
 
         <input

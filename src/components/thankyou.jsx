@@ -1,7 +1,9 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Thankyou = () => {
+    const location = useLocation();
+    const firstname = location.state?.firstname | "";
 
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ const Thankyou = () => {
           />
         </div>
         <div className="p-6 ">
-          <h3 className="text-lg font-medium text-black">Hi There,</h3>
+          <h3 className="text-lg font-medium text-black">Hi User,</h3>
           <h2 className="text-2xl font-bold my-2 text-black">Thanks You!</h2>
           <p className="text-gray-600 text-sm md:text-md mb-4">
             Thank you for subscribing to Beebark! We're so excited to welcome

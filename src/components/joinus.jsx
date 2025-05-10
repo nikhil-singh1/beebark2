@@ -55,7 +55,7 @@ const JoinUs = () => {
       if (!response.ok) throw new Error(data.message || "Something went wrong");
 
       toast.success("Registration successful!");
-      navigate("/verify-otp", { state: { email } });
+      navigate("/verify-otp", { state: { email, firstname } });
     } catch (error) {
       toast.error(error.message);
     } finally {

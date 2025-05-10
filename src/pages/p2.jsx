@@ -17,7 +17,7 @@ const ProfileSetup = () => {
         email: "",
         bio: "",
         // contact
-            country: "",
+            country: null,
             state: "",
             city: "",
             pincode: "",
@@ -53,6 +53,7 @@ const ProfileSetup = () => {
     const [coverPhotoPreview, setCoverPhotoPreview] = useState(null);
     const [profilePhotoPreview, setProfilePhotoPreview] = useState(null);
     const [businessLogoPreview, setBusinessLogoPreview] = useState(null);
+    const [countryOptions, setCountryOptions] = useState([]);
     const [errors, setErrors] = useState({});
     const sections = [
         "Profile Info", "Contact Info", "Social Media", "Business Info",
@@ -80,7 +81,13 @@ const ProfileSetup = () => {
         { value: "interior", label: "Interior Design" },
     ];
 
-
+    useEffect(() => {
+        axios.get("https://restcountries.com/v3.1/all").then(response => {
+            const countries = response.data.map(c => ({ label: c.name.common, value: c.name.common }))
+                .sort((a, b) => a.label.localeCompare(b.label));
+            setCountryOptions(countries);
+        });
+    }, []);
 
     useEffect(() => {
         if (userData) {
@@ -95,7 +102,7 @@ const ProfileSetup = () => {
                 email: userData.email || "",
                 bio: userData.bio || "",
                 // contact
-                    country: userData.country || "",
+                    country: userData.country || null,
                     state: userData.state || "",
                     city: userData.city || "",
                     pincode: userData.pincode || "",
@@ -132,16 +139,16 @@ const ProfileSetup = () => {
         }
     }, [userData]);
 
-    const handleFieldChange = (field, selectedOption) => {
+    const handleFieldChange = (field, value) => {
         setState(prev => {
-          if (field.includes('.')) {
-            const [parent, child] = field.split('.');
-            return { ...prev, [parent]: { ...prev[parent], [child]: selectedOption } }; // Store the entire object
-          }
-          return { ...prev, [field]: selectedOption }; // Store the entire object
+            if (field.includes('.')) {
+                const [parent, child] = field.split('.');
+                return { ...prev, [parent]: { ...prev[parent], [child]: value } };
+            }
+            return { ...prev, [field]: value };
         });
         setErrors(prev => ({ ...prev, [field]: "" }));
-      };
+    };
 
     const handleMultiSelectChange = (field, selectedOptions) => {
         setState(prev => ({ ...prev, [field]: selectedOptions }));
@@ -181,7 +188,7 @@ const ProfileSetup = () => {
                 newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} is required`;
             } else if (Array.isArray(value) && value.length === 0 && !['certifications', 'associations'].includes(field)) {
                 newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} is required`;
-            } else if (value === null && !['isOpenToFreelance', 'openToCollaboration', 'openToHiringOrInternship', 'country'].includes(field)) {
+            } else if (value === null && !['isOpenToFreelance', 'openToCollaboration', 'openToHiringOrInternship', 'contact.country'].includes(field)) {
                 newErrors[field] = `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} is required`;
             }
         });
@@ -202,20 +209,21 @@ const ProfileSetup = () => {
             {errors[field] && <p className="mt-1 text-red-500 text-sm">{errors[field]}</p>}
         </div>
     );
-    
+
     const renderSelect = (label, field, options) => (
         <div className="mb-4">
             <label className="block font-medium text-gray-700 mb-1">{label}</label>
             <Select
-                options={options}
-                styles={selectStyles}
-                value={state[field]}
-                onChange={(selected) => handleFieldChange(field, selected)}
-                isClearable
-            />
+                options={options}
+                styles={selectStyles}
+                value={state[field]}
+                onChange={(selected) => handleFieldChange(field, selected)}
+                isClearable
+            />
             {errors[field] && <p className="mt-1 text-red-500 text-sm">{errors[field]}</p>}
         </div>
     );
+
     const renderMultiSelect = (label, field, options) => (
         <div className="mb-4">
             <label className="block font-medium text-gray-700 mb-1">{label}</label>
@@ -248,11 +256,7 @@ const ProfileSetup = () => {
             <label className="block font-medium text-gray-700 mb-1">{label}</label>
             {state[field].map((item, index) => (
                 <div key={index} className="border rounded-md p-3 mb-2 bg-gray-50">
-                    {renderItemInputs(item, index, (name, value) => {
-                        const updatedArray = [...state[field]];
-                        updatedArray[index] = { ...updatedArray[index], [name]: value };
-                        setState(prev => ({ ...prev, [field]: updatedArray }));
-                    })}
+                    {renderItemInputs(item, index, (updatedItem) => handleUpdateItemInArray(field, index, updatedItem))}
                     <button
                         type="button"
                         onClick={() => handleRemoveItemFromArray(field, index)}
@@ -272,79 +276,53 @@ const ProfileSetup = () => {
             {errors[field] && <p className="mt-1 text-red-500 text-sm">{errors[field]}</p>}
         </div>
     );
-    const renderWorkHistoryInputs = (item, index, onItemChange) => (
+
+    const renderWorkHistoryInputs = (item, index, updateItem) => (
         <>
-            {renderItemInput(`workHistory.${index}.name`, "Company Name", (value) => onItemChange('name', value), 'text', item.name)}
-            {renderItemInput(`workHistory.${index}.role`, "Role", (value) => onItemChange('role', value), 'text', item.role)}
-            {renderItemInput(`workHistory.${index}.duration`, "Duration", (value) => onItemChange('duration', value), 'text', item.duration)}
+            {renderInput("Company Name", `workHistory.${index}.name`, 'text', "Company Name")}
+            {renderInput("Role", `workHistory.${index}.role`, 'text', "Your Role")}
+            {renderInput("Duration", `workHistory.${index}.duration`, 'text', "e.g., 2020-2022")}
         </>
     );
 
-    const renderTestimonialInputs = (item, index, onItemChange) => (
+    const renderTestimonialInputs = (item, index, updateItem) => (
         <>
-            {renderItemInput(`testimonials.${index}.clientName`, "Client Name", (value) => onItemChange('clientName', value), 'text', item.clientName)}
-            {renderItemInput(`testimonials.${index}.message`, "Message", (value) => onItemChange('message', value), 'textarea', item.message)}
-            {renderItemInput(`testimonials.${index}.date`, "Date", (value) => onItemChange('date', value), 'date', item.date)}
+            {renderInput("Client Name", `testimonials.${index}.clientName`, 'text', "Client Name")}
+            {renderInput("Message", `testimonials.${index}.message`, 'textarea', "Testimonial Message")}
+            {renderInput("Date", `testimonials.${index}.date`, 'date')}
         </>
     );
 
-    const renderAwardInputs = (item, index, onItemChange) => (
+    const renderAwardInputs = (item, index, updateItem) => (
         <>
-            {renderItemInput(`awards.${index}.title`, "Title", (value) => onItemChange('title', value), 'text', item.title)}
-            {renderItemInput(`awards.${index}.organization`, "Organization", (value) => onItemChange('organization', value), 'text', item.organization)}
-            {renderItemInput(`awards.${index}.year`, "Year", (value) => onItemChange('year', value), 'number', item.year)}
-            {renderItemInput(`awards.${index}.description`, "Description", (value) => onItemChange('description', value), 'textarea', item.description)}
+            {renderInput("Title", `awards.${index}.title`, 'text', "Award Title")}
+            {renderInput("Organization", `awards.${index}.organization`, 'text', "Awarding Organization")}
+            {renderInput("Year", `awards.${index}.year`, 'number', "Year Received")}
+            {renderInput("Description", `awards.${index}.description`, 'textarea', "Description")}
         </>
     );
 
-    const renderProjectInputs = (item, index, onItemChange) => (
+    const renderProjectInputs = (item, index, updateItem) => (
         <>
-            {renderItemInput(`projects.${index}.title`, "Title", (value) => onItemChange('title', value), 'text', item.title)}
-            {renderItemSelect(`projects.${index}.type`, "Type", projectTypeOptions, (selected) => onItemChange('type', selected), item.type)}
-            {renderItemInput(`projects.${index}.yearStatus`, "Status (Completed/In Progress)", (value) => onItemChange('yearStatus', value), 'text', item.yearStatus)}
-            {renderItemInput(`projects.${index}.location`, "Location", (value) => onItemChange('location', value), 'text', item.location)}
-            {renderItemInput(`projects.${index}.budgetRange`, "Budget Range", (value) => onItemChange('budgetRange', value), 'text', item.budgetRange)}
-            {renderItemInput(`projects.${index}.roleInProject`, "Role in Project", (value) => onItemChange('roleInProject', value), 'text', item.roleInProject)}
-            {renderItemInput(`projects.${index}.projectLink`, "Link", (value) => onItemChange('projectLink', value), 'text', item.projectLink)}
+            {renderInput("Title", `projects.${index}.title`, 'text', "Project Title")}
+            {renderSelect("Type", `projects.${index}.type`, projectTypeOptions)}
+            {renderInput("Status (Completed/In Progress)", `projects.${index}.yearStatus`, 'text', "e.g., Completed")}
+            {renderInput("Location", `projects.${index}.location`, 'text', "Location")}
+            {renderInput("Budget Range", `projects.${index}.budgetRange`, 'text', "e.g., $10k - $50k")}
+            {renderInput("Role in Project", `projects.${index}.roleInProject`, 'text', "Your Role")}
+            {renderInput("Link", `projects.${index}.projectLink`, 'text', "Project Link")}
         </>
     );
 
-    const renderTeamMemberInputs = (item, index, onItemChange) => (
+    const renderTeamMemberInputs = (item, index, updateItem) => (
         <>
-            {renderItemInput(`teamMembers.${index}.name`, "Name", (value) => onItemChange('name', value), 'text', item.name)}
-            {renderItemInput(`teamMembers.${index}.role`, "Role", (value) => onItemChange('role', value), 'text', item.role)}
-            {renderItemInput(`teamMembers.${index}.bio`, "Bio", (value) => onItemChange('bio', value), 'textarea', item.bio)}
-            {renderItemInput(`teamMembers.${index}.linkedProfileId`, "Linked Profile ID", (value) => onItemChange('linkedProfileId', value), 'text', item.linkedProfileId)}
+            {renderInput("Name", `teamMembers.${index}.name`, 'text', "Team Member Name")}
+            {renderInput("Role", `teamMembers.${index}.role`, 'text', "Team Member Role")}
+            {renderInput("Bio", `teamMembers.${index}.bio`, 'textarea', "Short Bio")}
+            {renderInput("Linked Profile ID", `teamMembers.${index}.linkedProfileId`, 'text', "Internal Profile ID")}
         </>
     );
 
-    const renderItemInput = (field, label, customOnChange, type = 'text', initialValue) => (
-        <div className="mb-4">
-            <label className="block font-medium text-gray-700 mb-1">{label}</label>
-            <input
-                type={type}
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                value={initialValue || ''}
-                onChange={e => customOnChange(e.target.value)}
-                placeholder={label}
-            />
-            {errors[field] && <p className="mt-1 text-red-500 text-sm">{errors[field]}</p>}
-        </div>
-    );
-
-    const renderItemSelect = (field, label, options, customOnChange, initialValue) => (
-        <div className="mb-4">
-            <label className="block font-medium text-gray-700 mb-1">{label}</label>
-            <Select
-                options={options}
-                styles={selectStyles}
-                value={initialValue || null}
-                onChange={selected => customOnChange(selected)}
-                isClearable
-            />
-            {errors[field] && <p className="mt-1 text-red-500 text-sm">{errors[field]}</p>}
-        </div>
-    );
     const handleSaveSection = async (sectionName) => {
         let dataToSave = {};
         let fieldsToValidate = [];
@@ -362,7 +340,7 @@ const ProfileSetup = () => {
                 break;
             case "Contact Info":
                 dataToSave = {
-                    country: state.country,
+                    country: state.contact,
                     state: state.state,
                     city: state.city,
                     pincode: state.pincode,
@@ -452,7 +430,7 @@ const ProfileSetup = () => {
                 sectionErrors[field] = `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} is required`;
             } else if (Array.isArray(value) && value.length === 0 && !['certifications', 'associations'].includes(field)) {
                 sectionErrors[field] = `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} is required`;
-            } else if (value === null && !['isOpenToFreelance', 'openToCollaboration', 'openToHiringOrInternship', 'country'].includes(field)) {
+            } else if (value === null && !['isOpenToFreelance', 'openToCollaboration', 'openToHiringOrInternship', 'contact.country'].includes(field)) {
                 sectionErrors[field] = `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} is required`;
             }
         });
@@ -528,7 +506,7 @@ const ProfileSetup = () => {
                 return (
                     <>
                         <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
-                        {renderInput("Country", "country")}
+                        {renderSelect("Country", "country", countryOptions)}
                         {renderInput("State", "state")}
                         {renderInput("City", "city")}
                         {renderInput("Pincode", "pincode")}

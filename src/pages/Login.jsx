@@ -12,33 +12,35 @@ const Login = () => {
   const navigate = useNavigate();
   const { setToken, setUserData } = useContext(AuthContext); // Access context values
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+ const handleLogin = async (e) => {
+  e.preventDefault();
 
-    try {
-      const { data } = await axios.post("https://beebark-backend-2.vercel.app/api/auth/login", {
-        email,
-        password,
-        rememberMe,
-      });
+  try {
+    const { data } = await axios.post("https://beebark-backend-2.vercel.app/api/auth/login", {
+      email,
+      password,
+      rememberMe,
+    });
 
-      localStorage.setItem("userToken", data.token);
+    localStorage.setItem("userToken", data.token);
 
-      if (data.user) {
-        localStorage.setItem("userDetails", JSON.stringify(data.user));
-        setUserData(data.user); // Update AuthContext user data
-      }
-
-      setToken(data.token); // Update AuthContext token state
-
-      alert(data.message || "Login successful"); // Use message from backend or default
-      navigate(`/users/${data.user?._id || data.userId}`); // Redirect using user ID (handle potential undefined)
-
-    } catch (error) {
-      console.error("Error logging in:", error.response?.data?.message || error.message);
-      alert(error.response?.data?.message || "Error logging in");
+    if (data.user) {
+      localStorage.setItem("userDetails", JSON.stringify(data.user));
+      setUserData(data.user); // Update AuthContext user data
     }
-  };
+
+    setToken(data.token); // Update AuthContext token state
+
+    alert(data.message || "Login successful");
+
+    // Redirect to home page first
+    navigate("/"); // Redirect to home page
+
+  } catch (error) {
+    console.error("Error logging in:", error.response?.data?.message || error.message);
+    alert(error.response?.data?.message || "Error logging in");
+  }
+};
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -111,7 +113,7 @@ const Login = () => {
               Sign In
             </button>
 
-            <div className="text-center text-sm text-gray-600 mt-4">
+            <div className="text-center text-sm text-yellow-500  hover:text-yellow-600 mt-4">
               <Link to="/forgot-password" className="hover:text-blue-600">
                 Forgot Password?
               </Link>

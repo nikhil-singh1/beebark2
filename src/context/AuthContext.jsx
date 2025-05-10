@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-// Named export
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const backendUrl = "https://beebark-backend-2.vercel.app";
 
-  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [token, setToken] = useState(localStorage.getItem('userToken') || null);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,13 +17,20 @@ export const AuthProvider = ({ children }) => {
   const loadUserProfileData = async () => {
     try {
       setLoading(true);
-      // After making the route basic, we need to send the userId in the query
+
       const storedUserDetails = localStorage.getItem('userDetails');
       const userDetails = storedUserDetails ? JSON.parse(storedUserDetails) : null;
       const userId = userDetails?._id;
 
-      if (userId) {
-        const { data } = await axios.get(`${backendUrl}/api/users/get-profile?userId=${userId}`);
+      if (userId && token) {
+        const { data } = await axios.get(
+          `${backendUrl}/api/users/get-profile?userId=${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (data.success) {
           setUserData(data.userData);
@@ -34,7 +40,7 @@ export const AuthProvider = ({ children }) => {
         }
       } else {
         setUserData(null);
-        toast.error("User ID not found after login.");
+        toast.error("User ID or token missing.");
       }
     } catch (err) {
       setUserData(null);
@@ -57,15 +63,16 @@ export const AuthProvider = ({ children }) => {
   const login = (userData, token) => {
     setUserData(userData);
     setToken(token);
-    localStorage.setItem('token', token);
-    localStorage.setItem('userDetails', JSON.stringify(userData)); // Store user details on login
+    localStorage.setItem('userToken', token);
+    localStorage.setItem('userDetails', JSON.stringify(userData));
     navigate(`/users/${userData._id}`);
+    console.log(token);
   };
 
   const logout = () => {
     setUserData(null);
     setToken(null);
-    localStorage.removeItem('token');
+    localStorage.removeItem('userToken');
     localStorage.removeItem('userDetails');
     navigate('/login');
   };
