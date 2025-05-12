@@ -73,11 +73,11 @@ export default function Header() {
           ) : (
             <div className="flex items-center space-x-5">
               <Link
-                to="/login"
+                to="/register"
                 className="flex items-center text-black font-bold space-x-2 cursor-pointer font-poppins border p-2 rounded-md hover:bg-yellow-300"
               >
                 <LogIn className="w-5 h-5" />
-                <span>Login</span>
+                <span>Register Now</span>
               </Link>
 
           
@@ -123,8 +123,8 @@ export default function Header() {
                 </li>
                 <li>
                 <Link to="/service" onClick={() => setMenuOpen(false)} className="hover:text-yellow-500">
-  Services
-</Link>
+               Services
+              </Link>
                 </li>
 
                 <li>
