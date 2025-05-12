@@ -100,7 +100,7 @@ export default function Header() {
 
       {/* Fixed Full-Screen Menu */}
       <motion.div
-        className={`fixed top-0 left-0 w-full h-full bg-[#221912] text-black p-6 z-40 ${
+        className={`fixed top-0 left-0 w-full h-full bg-white text-black p-6 z-40 ${
           menuOpen ? "transform translate-x-0" : "transform -translate-x-full"
         }`}
         initial={{ x: "-100%" }}
@@ -122,13 +122,9 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="#services"
-                    onClick={() => setMenuOpen(false)}
-                    className="hover:text-yellow-500"
-                  >
-                    Services
-                  </a>
+                <Link to="/service" onClick={() => setMenuOpen(false)} className="hover:text-yellow-500">
+  Services
+</Link>
                 </li>
 
                 <li>
@@ -165,21 +161,21 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Facebook className="w-6 h-6 text-gray-100 hover:text-gray-200" />
+                <Facebook className="w-6 h-6 text-gray-700 hover:text-gray-800" />
               </a>
               <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Twitter className="w-6 h-6 text-gray-100 hover:text-gray-200" />
+                <Twitter className="w-6 h-6 text-gray-700 hover:text-gray-800" />
               </a>
               <a
                 href="https://www.instagram.com/thebeebark/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Instagram className="w-6 h-6 text-gray-100 hover:text-gray-200" />
+                <Instagram className="w-6 h-6 text-gray-700 hover:text-gray-800" />
               </a>
             </div>
                 </li>
@@ -201,21 +197,21 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Facebook className="w-6 h-6 text-gray-100 hover:text-gray-200" />
+                <Facebook className="w-6 h-6 text-gray-700 hover:text-gray-800" />
               </a>
               <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Twitter className="w-6 h-6 text-gray-100 hover:text-gray-200" />
+                <Twitter className="w-6 h-6 text-gray-700 hover:text-gray-800" />
               </a>
               <a
                 href="https://www.instagram.com/thebeebark/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Instagram className="w-6 h-6 text-gray-100 hover:text-gray-200" />
+                <Instagram className="w-6 h-6 text-gray-700 hover:text-gray-800" />
               </a>
             </div>
           </div>

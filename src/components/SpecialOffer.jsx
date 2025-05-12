@@ -65,7 +65,7 @@ const SpecialOffer = () => {
         </div>
       </div>
       <div className="mt-6 text-center">
-        <p className="bg-yellow-300 text-black font-bold text-lg py-3 px-6 rounded-lg inline-block">
+        <p className="bg-yellow-400 text-black font-bold text-lg py-3 px-6 rounded-lg inline-block">
           Total Value -  ₹4,10,000 - <span><a href="/terms" className="text-white font-semibold hover:text-black">See Offer Terms.</a></span>
         </p>
       </div>

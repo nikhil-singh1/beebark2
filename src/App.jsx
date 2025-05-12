@@ -30,6 +30,7 @@ const AppRoutes = () => (
 <AuthProvider>
   <Routes>
     <Route path="/" element={<Home />} />
+    <Route path="/service" element={<Home />} />
     <Route path="/contact" element={<Contact />} />
     <Route path="/register" element={<Register />} />
     <Route path="/manifesto" element={<ManifestoPage />} />
@@ -40,6 +41,7 @@ const AppRoutes = () => (
     <Route path="/login" element={<Login/>}/>
     <Route path="/verify-otp"  element={<VerifyOtp/>} />
     <Route path="/forgot-password"  element={<ForgotPassword/>} />
+   
     {/* <Route path="/users/:userId" element={<VerifyOtp/>}  /> */}
 
   </Routes>

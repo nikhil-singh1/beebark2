@@ -85,8 +85,8 @@ const  FuturisticTimer = () => {
 
       {/* Right-aligned text below timer */}
       <div className="relative z-10 mt-10 w-full px-6">
-        <h2 className="text-white text-center text-xl sm:text-2xl md:text-6xl font-semibold">
-          To Exprience Our SaaS Services
+        <h2 className="text-yellow-400 text-center text-xl sm:text-2xl md:text-6xl font-semibold">
+        To Experience Our SaaS Services
         </h2>
       </div>
     </div>

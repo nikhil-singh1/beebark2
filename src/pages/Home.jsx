@@ -1,8 +1,9 @@
-
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero';
 import Header from '../components/Header';
 import HeroSection from '../components/Hero';
-import Scrolling from '../components/ScrollingParagraph';
+import Service from '../components/Service';
 import SpecialOffer from '../components/SpecialOffer';
 import WelcomeBanner from '../components/Welcome';
 
@@ -12,13 +13,25 @@ import RegisterNowSection from '../components/section1';
 import FuturisticTimer from '../components/Welcome';
 
 const Home = () => {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/service') {
+      const serviceSection = document.getElementById('services');
+      if (serviceSection) {
+        serviceSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location.pathname]);
+
   return (
     <main className="bg-white overflow-auto h-full">
       <Header />
       <HeroSection />
       {/* <Hero /> */}
       <FuturisticTimer />
-      <Scrolling />
+      <Service />
       <SpecialOffer />
       {/* <Highlights />
       <Model />

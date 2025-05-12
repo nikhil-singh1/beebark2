@@ -13,10 +13,12 @@ const ProfileSetup = () => {
         isVerified: "",
         category: "",
         p_no: "",
+        b_no: "",
         p_code: "",
         email: "",
         bio: "",
         // contact
+            address: "",
             country: "",
             state: "",
             city: "",
@@ -91,10 +93,12 @@ const ProfileSetup = () => {
                 isVerified: userData.isVerified || "",
                 category: userData.category || "",
                 p_no: userData.phone || "",
-                p_code: userData.countryCode || "",
+                b_no: userData.phoneBusiness || "",
+                p_code: userData.countryCode|| "",
                 email: userData.email || "",
                 bio: userData.bio || "",
                 // contact
+                    address:  userData.address || "",
                     country: userData.country || "",
                     state: userData.state || "",
                     city: userData.city || "",
@@ -105,7 +109,7 @@ const ProfileSetup = () => {
                     twitter: userData.twitter || "",
                     linkedin: userData.linkedin || "",
                     website: userData.website || "",
-             
+                name : userData.name || "",
                 establishmentYear: userData.establishmentYear || "",
                 yearOfExperience: userData.yearOfExperience || "",
                 licenseNumber: userData.licenseNumber || "",
@@ -190,18 +194,23 @@ const ProfileSetup = () => {
     };
 
     const renderInput = (label, field, type = 'text', placeholder = '') => (
-        <div className="mb-4">
-            <label className="block font-medium text-gray-700 mb-1">{label}</label>
+        <div className="mb-4 flex items-center">
+            <label className="text-sm md:text-lg font-semibold text-gray-700 w-40 px-2">{label}</label> 
             <input
                 type={type}
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                className="px-4 py-3 text-sm border border-gray-300 focus:ring-4 focus:ring-yellow-300 focus:border-yellow-500 focus:outline-none transition-all duration-200 ease-in-out max-w-[500px] w-full"
                 value={field.includes('.') ? (state[field.split('.')[0]]?.[field.split('.')[1]] || '') : state[field] || ''}
                 onChange={e => handleFieldChange(field, e.target.value)}
                 placeholder={placeholder}
             />
-            {errors[field] && <p className="mt-1 text-red-500 text-sm">{errors[field]}</p>}
+            {errors[field] && <p className="mt-1 text-red-600 text-sm font-medium">{errors[field]}</p>}
         </div>
     );
+    
+    
+    
+    
+    
     
     const renderSelect = (label, field, options) => (
         <div className="mb-4">
@@ -358,16 +367,22 @@ const ProfileSetup = () => {
                     profilePhoto: state.profilePhoto,
                     coverImage: state.coverImage,
                 };
-                fieldsToValidate = ["firstName", "lastName", "bio"];
+                fieldsToValidate = ["firstName", "lastName"];
                 break;
             case "Contact Info":
                 dataToSave = {
+                    
+                    email : state.email,
+                    p_code : state.p_code,
+                    p_no : state.p_no,
+                    b_no : state.b_no,
+                    address : state.address,
                     country: state.country,
                     state: state.state,
                     city: state.city,
                     pincode: state.pincode,
                 };
-                fieldsToValidate = ["country", "state", "city", "pincode"];
+                fieldsToValidate = ["email","p_code","p_no","address","country", "state", "city", "pincode"];
                 break;
             case "Social Media":
                 dataToSave = {
@@ -380,13 +395,14 @@ const ProfileSetup = () => {
                 break;
             case "Business Info":
                 dataToSave = {
+                    name : state.name,
                     establishmentYear: state.establishmentYear,
                     businessLogo: state.businessLogo,
                     yearOfExperience: state.yearOfExperience,
                     licenseNumber: state.licenseNumber,
                     languageSpoken: state.languageSpoken.map(lang => lang.value),
                 };
-                fieldsToValidate = ["establishmentYear", "yearOfExperience", "licenseNumber"];
+                fieldsToValidate = ["name","establishmentYear", "yearOfExperience", "licenseNumber"];
                 break;
             case "Experience":
                 dataToSave = {
@@ -509,10 +525,7 @@ const ProfileSetup = () => {
                         {renderInput("First Name", "firstName")}
                         {renderInput("Last Name", "lastName")}
                         {renderInput("Profile Verified", "isVerified")}
-                        {renderInput("Email Address", "email")}
                         {renderInput("Profile Category", "category")}
-                        {renderInput("Personal Mobile No.", "p_no")}
-                        {renderInput("Mobile Code", "p_code")}
                         {renderInput("Bio", "bio", 'textarea')}
                         {renderImageUpload("Profile Photo", "profilePhoto", profilePhotoPreview, setProfilePhotoPreview)}
                         {renderImageUpload("Cover Photo", "coverImage", coverPhotoPreview, setCoverPhotoPreview)}
@@ -524,22 +537,30 @@ const ProfileSetup = () => {
                         </button>
                     </>
                 );
-            case "Contact Info":
-                return (
-                    <>
-                        <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
-                        {renderInput("Country", "country")}
-                        {renderInput("State", "state")}
-                        {renderInput("City", "city")}
-                        {renderInput("Pincode", "pincode")}
-                        <button
-                            onClick={() => handleSaveSection('Contact Info')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
-                        >
-                            Save Contact Info
-                        </button>
-                    </>
-                );
+                case "Contact Info":
+                    return (
+                        <>
+                            <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
+                            {renderInput("Email Address", "email")}
+                            {renderInput("Mobile Code", "p_code")}
+                            {renderInput("Personal Mobile No.", "p_no")}
+                            {renderInput("Business Mobile No.", "b_no")}
+                
+                            <h3 className="text-lg font-semibold mt-6 mb-2">Business Address</h3>
+                            {renderInput("Address", "address")}               {/* New Address field */}
+                            {renderInput("Country", "country")}
+                            {renderInput("State", "state")}
+                            {renderInput("City", "city")}
+                            {renderInput("Pincode", "pincode")}
+                
+                            <button
+                                onClick={() => handleSaveSection('Contact Info')}
+                                className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            >
+                                Save Contact Info
+                            </button>
+                        </>
+                    );
             case "Social Media":
                 return (
                     <>
@@ -560,6 +581,7 @@ const ProfileSetup = () => {
                 return (
                     <>
                         <h2 className="text-xl font-semibold mb-4">Business Information</h2>
+                        {renderInput("Business Name", "name")}
                         {renderInput("Establishment Year", "establishmentYear", 'number')}
                         {renderImageUpload("Business Logo", "businessLogo", businessLogoPreview, setBusinessLogoPreview)}
                         {renderInput("Years of Experience", "yearOfExperience", 'number')}
