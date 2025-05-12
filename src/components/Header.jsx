@@ -77,7 +77,7 @@ export default function Header() {
                 className="flex items-center text-black font-bold space-x-2 cursor-pointer font-poppins border p-2 rounded-md hover:bg-yellow-300"
               >
                 <LogIn className="w-5 h-5" />
-                <span>Register Now</span>
+                <span>Register</span>
               </Link>
 
           
