@@ -104,7 +104,7 @@ const Scrolling = () => {
 
  <div className="w-1/3 text-left px-5 mr-20 pr-20 z-10">
     <h2 className="text-3xl md:text-7xl font-bold text-[#221912]">
-      Our <span className="text-yellow-500 text-4xl md:text-8xl">SaaS</span> Services
+      Our <span className="text-yellow-400 text-4xl md:text-8xl">SaaS</span> Services
     </h2>
   </div>
     

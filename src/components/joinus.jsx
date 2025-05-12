@@ -154,11 +154,11 @@ const JoinUs = () => {
                 required
               >
                 <option value="">Select Category</option>
-                <option value="architect">Architect</option>
-                <option value="construction">Construction</option>
-                <option value="real_estate">Real Estate</option>
-                <option value="designer">Designer</option>
-                <option value="others">Others</option>
+                <option value="Architect">Architect</option>
+                <option value="Construction">Construction</option>
+                <option value="Real Estate">Real Estate</option>
+                <option value="Designer">Designer</option>
+                <option value="Others">Others</option>
               </select>
             </div>
 

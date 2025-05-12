@@ -53,7 +53,7 @@ export default function HeroSection() {
 
   return (
     <div
-      className="relative w-full h-[450px] md:h-[600px] overflow-hidden"
+      className="relative w-full h-[400px] md:h-[600px] mt-10 pt-10 overflow-hidden"
     
     >
       {/* Video Background */}
@@ -72,7 +72,7 @@ export default function HeroSection() {
       </video>
 
       {/* Mute/Unmute Button */}
-      <div className="absolute bottom-5 right-5 bg-black bg-opacity-50 p-2 rounded-full cursor-pointer z-10">
+      <div className="absolute bottom-5 right-5  p-2 rounded-full cursor-pointer z-10">
         {isMuted ? (
           <SpeakerXMarkIcon
             className="w-6 h-6 md:w-8 md:h-8 text-white"

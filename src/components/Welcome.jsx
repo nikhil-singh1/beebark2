@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const FuturisticTimer = () => {
+const  FuturisticTimer = () => {
   const [timeLeft, setTimeLeft] = useState({
     months: 0,
     days: 0,
@@ -10,8 +10,7 @@ const FuturisticTimer = () => {
     milliseconds: 0,
   });
 
-  // Set the target date to August 20, 2025, 23:59:59.999 IST
-  const targetDate = new Date("2025-08-20T23:59:59.999+05:30");  // IST is UTC+5:30
+  const targetDate = new Date("2025-08-20T23:59:59.999+05:30");
 
   const calculateTimeLeft = () => {
     const now = new Date();
@@ -50,7 +49,7 @@ const FuturisticTimer = () => {
 
   return (
     <div
-      className="relative w-full h-[500px] flex items-center justify-center font-[Montserrat]"
+      className="relative w-full h-[500px] md:h-[500px] flex items-center justify-center font-[Montserrat] flex-col"
       style={{
         backgroundImage: `url("/timer.jpeg")`,
         backgroundSize: "cover",
@@ -61,8 +60,8 @@ const FuturisticTimer = () => {
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
       {/* Timer Display shifted upward */}
-      <div className="relative z-10 text-white text-[2rem] sm:text-[2.8rem] md:text-[3.5rem] font-extrabold text-center flex flex-wrap justify-center gap-6 px-6 mt-[-80px]">
-        {[ 
+      <div className="relative z-10 text-white text-[2rem] sm:text-[2.8rem] md:text-[3.5rem] font-extrabold text-center flex flex-wrap justify-center gap-6 px-6">
+        {[
           { label: "Months", value: timeLeft.months },
           { label: "Days", value: timeLeft.days },
           { label: "Hours", value: timeLeft.hours },
@@ -82,6 +81,13 @@ const FuturisticTimer = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Right-aligned text below timer */}
+      <div className="relative z-10 mt-10 w-full px-6">
+        <h2 className="text-white text-center text-xl sm:text-2xl md:text-6xl font-semibold">
+          To Exprience Our SaaS Services
+        </h2>
       </div>
     </div>
   );

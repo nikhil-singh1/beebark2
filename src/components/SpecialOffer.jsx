@@ -47,10 +47,9 @@ const SpecialOffer = () => {
             Unlock <span className="underline decoration-green-500">₹4,10,000</span>
           </h3>
           <p className="text-gray-700 text-lg">Worth of Premium Services -</p>
-          <p className="text-black text-2xl font-bold">Absolutely FREE!</p>
           <button
             onClick={handleAvailNow}
-            className="mt-4 bg-yellow-400 text-black px-6 py-3 rounded-lg shadow-md font-bold hover:bg-yellow-600"
+            className="mt-4 bg-yellow-300 text-black px-6 py-3 rounded-lg shadow-md font-bold hover:bg-yellow-400"
           >
             Avail Now!
           </button>
@@ -66,7 +65,7 @@ const SpecialOffer = () => {
         </div>
       </div>
       <div className="mt-6 text-center">
-        <p className="bg-yellow-400 text-black font-bold text-lg py-3 px-6 rounded-lg inline-block">
+        <p className="bg-yellow-300 text-black font-bold text-lg py-3 px-6 rounded-lg inline-block">
           Total Value -  ₹4,10,000 - <span><a href="/terms" className="text-white font-semibold hover:text-black">See Offer Terms.</a></span>
         </p>
       </div>
