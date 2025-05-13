@@ -66,10 +66,16 @@ const App = () => {
 
   return (
     <>
-      <ScrollToTop />
-      {loading ? <LoadingPage /> : <AppRoutes />}
-      <FloatingChatIcon />
-    </>
+    <ScrollToTop />
+    {loading ? (
+      <LoadingPage />
+    ) : (
+      <>
+        <AppRoutes />
+        <FloatingChatIcon />
+      </>
+    )}
+  </>
   );
 };
 
