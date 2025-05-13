@@ -73,11 +73,11 @@ export default function Header() {
           ) : (
             <div className="flex items-center space-x-5">
               <Link
-                to="/register"
+                to="/login"
                 className="flex items-center text-black font-bold space-x-2 cursor-pointer font-poppins border p-2 rounded-md hover:bg-yellow-300"
               >
                 <LogIn className="w-5 h-5" />
-                <span>Register</span>
+                <span>Login</span>
               </Link>
 
           
