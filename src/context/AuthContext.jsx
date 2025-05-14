@@ -7,7 +7,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const backendUrl = "https://beebark-backend-2.vercel.app";
+  const backendUrl = "http://localhost:5000";
 
   const [token, setToken] = useState(localStorage.getItem('userToken') || null);
   const [userData, setUserData] = useState(null);

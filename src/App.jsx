@@ -16,6 +16,8 @@ import Login from "./pages/Login";
 import { AuthProvider } from './context/AuthContext.jsx';
 import VerifyOtp from "./pages/VerifyEmail.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
+import LetsTalk from "./components/letstalk";
+import Full_contact from "./pages/Full_contact.jsx";
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -37,7 +39,7 @@ const AppRoutes = () => (
     <Route path="/terms" element={<TermsConditions />} />
     <Route path="/users/:userId" element={<ProfileSetup />} />
     <Route path="/thankyou" element={<Thankyou />} />
-
+    <Route path="/LetsTalk" element={<Full_contact />} />
     <Route path="/login" element={<Login/>}/>
     <Route path="/verify-otp"  element={<VerifyOtp/>} />
     <Route path="/forgot-password"  element={<ForgotPassword/>} />
