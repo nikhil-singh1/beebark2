@@ -69,7 +69,6 @@ const ProfileLayout = ({
   if (isMobile) {
     return (
       <>
-        <Header />
         <div className="min-h-screen bg-white text-black"> {/* Removed py-4 px-2 from here */}
           <div className="max-w-md mx-auto border shadow-lg rounded-lg overflow-hidden bg-white">
             {/* Mobile Cover, Profile, Name Area */}

@@ -57,19 +57,22 @@ const SpecialOffer = () => {
             See{" "}
             <a href="/terms" className="text-yellow-500 font-semibold hover:text-yellow-600"> Offer Terms.</a>{" "}
             Overages apply if contact or email send limit is exceeded.{" "}
-            <a href="/terms" className="text-[#221912] font-semibold">
-              Learn more
-            </a>
+          
           </p>
         
         </div>
       </div>
       <div className="mt-6 text-center">
-        <p className="bg-yellow-400 text-black font-bold text-lg py-3 px-6 rounded-lg inline-block">
-          Total Value -  ₹4,10,000 - <span><a href="/terms" className="text-white font-semibold hover:text-black">See Offer Terms.</a></span>
-        </p>
-      </div>
-    </div>
+  <p className="bg-yellow-400 text-black font-bold text-lg py-3 px-6 rounded-lg inline-block">
+    Total Value - ₹4,10,000
+  </p>
+  <div className="mt-2"> {/* Added a div for better spacing */}
+    <a href="/terms" className="text-black font-semibold hover:underline text-center block">
+      See Offer Terms.
+    </a>
+  </div>
+</div>
+</div>
   );
 };
 

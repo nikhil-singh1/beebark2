@@ -42,10 +42,10 @@ const Thankyou = () => {
                 <div className="bg-black text-center py-4">
                     <p className="text-white text-sm">Follow us on:</p>
                     <div className="flex justify-center space-x-4 mt-2">
-                        <a href="https://www.instagram.com/" className="text-white hover:text-gray-200 text-lg" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.instagram.com/thebeebark/" className="text-white hover:text-gray-200 text-lg" target="_blank" rel="noopener noreferrer">
                             <FaInstagram />
                         </a>
-                        <a href="https://www.facebook.com/" className="text-white hover:text-gray-200 text-lg" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.facebook.com/profile.php?id=61560873622756" className="text-white hover:text-gray-200 text-lg" target="_blank" rel="noopener noreferrer">
                             <FaFacebook />
                         </a>
                         <a href="https://www.linkedin.com/" className="text-white hover:text-gray-200 text-lg" target="_blank" rel="noopener noreferrer">

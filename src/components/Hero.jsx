@@ -85,6 +85,10 @@ export default function HeroSection() {
           />
         )}
       </div>
+       {/* Yellow Strip at the Bottom */}
+      <div className="absolute bottom-0 left-0 w-full h-2 bg-yellow-400 ">
+        {/* You can add text or other content here if needed */}
+      </div>
     </div>
   );
 }

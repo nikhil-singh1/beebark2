@@ -3,7 +3,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 
 import Home from "./pages/Home";
-
 import Register from "./pages/Register";
 import Thankyou from "./components/thankyou";
 import ManifestoPage from "./pages/Manifesto";
@@ -17,7 +16,8 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import VerifyOtp from "./pages/VerifyEmail.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import LetsTalk from "./components/letstalk";
-import Full_contact from "./pages/Full_contact.jsx";
+import Header from "./components/Header.jsx";
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -29,24 +29,23 @@ const ScrollToTop = () => {
 };
 
 const AppRoutes = () => (
-<AuthProvider>
-  <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/service" element={<Home />} />
-    <Route path="/contact" element={<Contact />} />
-    <Route path="/register" element={<Register />} />
-    <Route path="/manifesto" element={<ManifestoPage />} />
-    <Route path="/terms" element={<TermsConditions />} />
-    <Route path="/users/:userId" element={<ProfileSetup />} />
-    <Route path="/thankyou" element={<Thankyou />} />
-    <Route path="/LetsTalk" element={<Full_contact />} />
-    <Route path="/login" element={<Login/>}/>
-    <Route path="/verify-otp"  element={<VerifyOtp/>} />
-    <Route path="/forgot-password"  element={<ForgotPassword/>} />
-   
-    {/* <Route path="/users/:userId" element={<VerifyOtp/>}  /> */}
-
-  </Routes>
+  <AuthProvider>
+    <Header/>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/service" element={<Home />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/manifesto" element={<ManifestoPage />} />
+      <Route path="/terms" element={<TermsConditions />} />
+      <Route path="/users/:userId" element={<ProfileSetup />} />
+      <Route path="/thankyou" element={<Thankyou />} />
+      <Route path="/LetsTalk" element={<LetsTalk />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/verify-otp" element={<VerifyOtp />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      {/* <Route path="/users/:userId" element={<VerifyOtp/>}  /> */}
+    </Routes>
   </AuthProvider>
 );
 
@@ -55,6 +54,8 @@ const App = () => {
     // This runs only once (on first render)
     return sessionStorage.getItem("hasLoaded") !== "true";
   });
+  const location = useLocation();
+  const shouldShowChatIcon = !["/LetsTalk", "/contact"].includes(location.pathname);
 
   useLayoutEffect(() => {
     if (loading) {
@@ -68,16 +69,16 @@ const App = () => {
 
   return (
     <>
-    <ScrollToTop />
-    {loading ? (
-      <LoadingPage />
-    ) : (
-      <>
-        <AppRoutes />
-        <FloatingChatIcon />
-      </>
-    )}
-  </>
+      <ScrollToTop />
+      {loading ? (
+        <LoadingPage />
+      ) : (
+        <>
+          <AppRoutes />
+          {shouldShowChatIcon && <FloatingChatIcon />}
+        </>
+      )}
+    </>
   );
 };
 

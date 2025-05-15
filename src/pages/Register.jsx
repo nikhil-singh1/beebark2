@@ -9,7 +9,6 @@ import ReferralSection2 from '../components/refer2';
 const Register = () => {
   return (
     <main className="bg-white">
-      <Header />
       <JoinUs />
       <ReferralSection2 />
     </main>

@@ -41,13 +41,13 @@ const RegisterNowSection = () => {
         worth of premium services.
       </p>
 
-      <div className="bg-yellow-500 text-[#221912] font-bold text-xl px-6 py-3 rounded-full shadow-lg">
+      <div className="text-yellow-400 font-bold text-xl  py-3">
         ⏳ {daysLeft} Days Left
       </div>
 
       <button
         onClick={handleAvailNow}
-        className="mt-8 px-8 py-3 text-lg font-semibold bg-white text-[#221912] border-2 border-yellow-500 rounded-full hover:bg-yellow-500 hover:text-white transition"
+        className="mt-4 px-8 py-3 text-lg font-semibold bg-white text-[#221912] border-2 border-yellow-500 rounded-full hover:bg-yellow-500 hover:text-white transition"
       >
         Register Now
       </button>
