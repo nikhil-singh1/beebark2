@@ -1,11 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import toast from 'react-hot-toast'; // Import toast for notifications
+import toast from 'react-hot-toast';
+import { AuthContext } from '../auth/AuthContext'; // Adjust the import path as needed
 
 export default function ReferralSection() {
     const [friendEmail, setFriendEmail] = useState('');
     const [isSending, setIsSending] = useState(false);
     const [invitationSent, setInvitationSent] = useState(false);
+    const [referrals, setReferrals] = useState([]);
+    const { token, backendUrl, userData } = useContext(AuthContext);
+
+    useEffect(() => {
+        const fetchReferrals = async () => {
+            if (token && userData?._id) {
+                try {
+                    const response = await axios.get(
+                        `${backendUrl}/api/users/referrals`, // Backend endpoint to get referrals by user
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                            params: {
+                                referrerId: userData._id, // Pass the logged-in user's ID
+                            },
+                        }
+                    );
+                    if (response.data.success) {
+                        setReferrals(response.data.referrals);
+                    } else {
+                        toast.error(response.data.message || 'Failed to fetch referrals.');
+                    }
+                } catch (error) {
+                    console.error('Error fetching referrals:', error);
+                    toast.error('Failed to fetch referral history.');
+                }
+            }
+        };
+
+        fetchReferrals();
+    }, [token, backendUrl, userData?._id]);
 
     const handleInvite = async () => {
         if (!friendEmail) {
@@ -20,14 +53,13 @@ export default function ReferralSection() {
         setIsSending(true);
 
         try {
-            const token = localStorage.getItem('userToken'); // Assuming you have the token in local storage
             if (!token) {
                 toast.error('You must be logged in to refer a friend.');
                 return;
             }
 
             const response = await axios.post(
-                'https://beebark-backend-2.vercel.app/api/users/refer', // Your backend referral endpoint
+                `${backendUrl}/api/users/refer`, // Your backend referral endpoint
                 { friendEmail },
                 {
                     headers: {
@@ -40,6 +72,8 @@ export default function ReferralSection() {
                 toast.success(response.data.message || `Invitation sent to ${friendEmail}`);
                 setFriendEmail(''); // Clear the input field on success
                 setInvitationSent(true); // Mark invitation as sent
+                // Optionally, you might want to refetch the referrals list here
+                // to show the newly sent invitation immediately.
             } else {
                 toast.error(response.data.message || 'Failed to send invitation.');
             }
@@ -80,6 +114,33 @@ export default function ReferralSection() {
                     {isSending ? 'Sending...' : invitationSent ? 'Invitation Sent' : 'Invite'}
                 </button>
             </div>
+
+            {/* Display Referred Users and their Status */}
+            {referrals.length > 0 && (
+                <div className="mt-8">
+                    <h3 className="text-lg font-semibold mb-2">People You've Referred</h3>
+                    <ul className="text-left">
+                        {referrals.map((referral) => (
+                            <li key={referral._id} className="py-2 border-b border-gray-500 last:border-b-0 flex justify-between items-center">
+                                <span>{referral.referredEmail}</span>
+                                <div className="flex items-center gap-4">
+                                    <span>
+                                        Signup Status: <span className={referral.signupStatus ? 'text-green-400' : 'text-yellow-400'}>
+                                            {referral.signupStatus ? 'DONE' : 'PENDING'}
+                                        </span>
+                                    </span>
+                                    <span>
+                                        Reward Status: <span className={referral.rewardStatus ? 'text-green-400' : 'text-yellow-400'}>
+                                            {referral.rewardStatus ? 'DONE' : 'PENDING'}
+                                        </span>
+                                    </span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
             {/* Yellow horizontal line */}
             <hr className="w-full border-0 h-1 bg-yellow-400 mt-6" />
         </div>

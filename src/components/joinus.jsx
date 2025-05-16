@@ -180,7 +180,7 @@ const JoinUs = () => {
                         </div>
 
                         {/* Other Category */}
-                        {category === "others" && (
+                        {category === "Others" && (
                             <div>
                                 <label className="block text-sm font-medium text-gray-600">Please specify</label>
                                 <input
