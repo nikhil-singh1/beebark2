@@ -85,7 +85,7 @@ export default function ReferralSection() {
     };
 
     return (
-        <div className="bg-[#221912] text-white p-6 text-center mx-auto">
+         <div className="bg-[#221912] text-white p-6 text-center mx-auto">
             <h2 className="text-xl font-bold">
                 Refer a Friend & Earn 5,000 Credit towards your next marketing campaign.
             </h2>
@@ -117,9 +117,9 @@ export default function ReferralSection() {
                     <h3 className="text-lg font-semibold mb-2">People You've Referred</h3>
                     <ul className="text-left">
                         {referrals.map((referral) => (
-                            <li key={referral._id} className="py-2 border-b border-gray-500 last:border-b-0 flex justify-between items-center">
-                                <span>{referral.referredEmail}</span>
-                                <div className="flex items-center gap-4">
+                            <li key={referral._id} className="py-2 border-b border-gray-500 last:border-b-0 flex md:flex-row flex-col justify-between items-center text-sm md:text-base">
+                                <span className="mb-1 md:mb-0 overflow-hidden text-ellipsis whitespace-nowrap">{referral.referredEmail}</span>
+                                <div className="flex md:flex-row flex-col items-start md:items-center gap-2 md:gap-4">
                                     <span>
                                         Signup Status: <span className={referral.signupStatus ? 'text-green-400' : 'text-yellow-400'}>
                                             {referral.signupStatus ? 'DONE' : 'PENDING'}
