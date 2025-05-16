@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { AuthContext } from '../auth/AuthContext'; // Adjust the import path as needed
+import { AuthContext } from '../context/AuthContext'; // Adjust the import path as needed
 
 export default function ReferralSection() {
     const [friendEmail, setFriendEmail] = useState('');
@@ -15,13 +15,10 @@ export default function ReferralSection() {
             if (token && userData?._id) {
                 try {
                     const response = await axios.get(
-                        `${backendUrl}/api/users/referrals`, // Backend endpoint to get referrals by user
+                        "https://beebark-backend-2.vercel.app/api/users/referrals",
                         {
                             headers: {
                                 Authorization: `Bearer ${token}`,
-                            },
-                            params: {
-                                referrerId: userData._id, // Pass the logged-in user's ID
                             },
                         }
                     );
@@ -47,7 +44,7 @@ export default function ReferralSection() {
         }
 
         if (isSending || invitationSent) {
-            return; // Prevent multiple clicks while sending or after sending
+            return;
         }
 
         setIsSending(true);
@@ -59,7 +56,7 @@ export default function ReferralSection() {
             }
 
             const response = await axios.post(
-                `${backendUrl}/api/users/refer`, // Your backend referral endpoint
+                "https://beebark-backend-2.vercel.app/api/users/refer",
                 { friendEmail },
                 {
                     headers: {
@@ -70,10 +67,10 @@ export default function ReferralSection() {
 
             if (response.data.success) {
                 toast.success(response.data.message || `Invitation sent to ${friendEmail}`);
-                setFriendEmail(''); // Clear the input field on success
-                setInvitationSent(true); // Mark invitation as sent
-                // Optionally, you might want to refetch the referrals list here
-                // to show the newly sent invitation immediately.
+                setFriendEmail('');
+                setInvitationSent(true);
+                // Optionally refetch referrals after sending an invite
+                // fetchReferrals();
             } else {
                 toast.error(response.data.message || 'Failed to send invitation.');
             }
@@ -102,20 +99,19 @@ export default function ReferralSection() {
                     className="px-4 py-2 w-64 rounded-lg text-gray-800 focus:outline-none"
                     value={friendEmail}
                     onChange={(e) => setFriendEmail(e.target.value)}
-                    disabled={isSending || invitationSent} // Disable input while sending or after sending
+                    disabled={isSending || invitationSent}
                 />
                 <button
                     className={`bg-white text-yellow-500 font-semibold px-4 py-2 rounded-lg flex items-center gap-1 cursor-pointer ${
                         isSending || invitationSent ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
                     onClick={handleInvite}
-                    disabled={isSending || invitationSent} // Disable button while sending or after sending
+                    disabled={isSending || invitationSent}
                 >
                     {isSending ? 'Sending...' : invitationSent ? 'Invitation Sent' : 'Invite'}
                 </button>
             </div>
 
-            {/* Display Referred Users and their Status */}
             {referrals.length > 0 && (
                 <div className="mt-8">
                     <h3 className="text-lg font-semibold mb-2">People You've Referred</h3>
@@ -141,7 +137,6 @@ export default function ReferralSection() {
                 </div>
             )}
 
-            {/* Yellow horizontal line */}
             <hr className="w-full border-0 h-1 bg-yellow-400 mt-6" />
         </div>
     );
