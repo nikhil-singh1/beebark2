@@ -1,7 +1,7 @@
-import { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import * as Sentry from "@sentry/react";
-
+import { Toaster } from "react-hot-toast"; // Import Toaster
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Thankyou from "./components/thankyou";
@@ -29,24 +29,21 @@ const ScrollToTop = () => {
 };
 
 const AppRoutes = () => (
-  <AuthProvider>
-    <Header/>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/service" element={<Home />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/manifesto" element={<ManifestoPage />} />
-      <Route path="/terms" element={<TermsConditions />} />
-      <Route path="/users/:userId" element={<ProfileSetup />} />
-      <Route path="/thankyou" element={<Thankyou />} />
-      <Route path="/LetsTalk" element={<LetsTalk />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/verify-otp" element={<VerifyOtp />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      {/* <Route path="/users/:userId" element={<VerifyOtp/>}  /> */}
-    </Routes>
-  </AuthProvider>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/service" element={<Home />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/register" element={<Register />} />
+    <Route path="/manifesto" element={<ManifestoPage />} />
+    <Route path="/terms" element={<TermsConditions />} />
+    <Route path="/users/:userId" element={<ProfileSetup />} />
+    <Route path="/thankyou" element={<Thankyou />} />
+    <Route path="/LetsTalk" element={<LetsTalk />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/verify-otp" element={<VerifyOtp />} />
+    <Route path="/forgot-password" element={<ForgotPassword />} />
+    {/* <Route path="/users/:userId" element={<VerifyOtp/>}  /> */}
+  </Routes>
 );
 
 const App = () => {
@@ -78,6 +75,7 @@ const App = () => {
           {shouldShowChatIcon && <FloatingChatIcon />}
         </>
       )}
+      <Toaster position="top-center" reverseOrder={false} /> {/* Add Toaster here */}
     </>
   );
 };

@@ -1,10 +1,13 @@
 import React from "react";
+import Header from "../components/Header";
 
 const TermsConditions = () => {
   return (
-    <div className="bg-white text-[#2d2119] min-h-screen px-6 py-12 md:px-20">
+    <>
+  <Header />
+    <div className="bg-white text-[#2d2119] min-h-screen px-6 py-12 md:px-20 mt-10">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-yellow-500 text-4xl font-bold mb-8">Terms & Conditions</h1>
+        <h1 className="text-yellow-500 text-4xl font-bold mb-8 mt-10 pt-10">Terms & Conditions</h1>
         <p className="text-lg text-black mb-6">
           <strong>Beebark Premium Offer</strong> for Architects, Interior Designers & Real Estate Professionals
         </p>
@@ -98,15 +101,19 @@ const TermsConditions = () => {
         </Section>
       </div>
     </div>
+      </>
   );
 };
 
 const Section = ({ title, children }) => (
+
+    
   <div className="mb-10">
     <h2 className="text-2xl font-semibold text-yellow-500 mb-2">{title}</h2>
     <div className="text-gray-800 leading-relaxed">{children}</div>
   </div>
 );
+
 
 const ListCheck = ({ children }) => (
   <li className="flex items-start gap-2">

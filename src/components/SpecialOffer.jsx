@@ -1,5 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const SpecialOffer = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const SpecialOffer = () => {
           <h2 className="text-3xl font-bold text-gray-800 pb-4">
             Exclusive offer for{" "}
             <span className="text-black underline decoration-pink-500">
-              Architects, Interior Designers & Real Estate Industry.
+              Architects, Interior Designers & Real Estate Industry
             </span>
           </h2>
 
@@ -46,7 +47,7 @@ const SpecialOffer = () => {
           <h3 className="text-2xl font-bold text-gray-800">
             Unlock <span className="underline decoration-green-500">₹4,10,000</span>
           </h3>
-          <p className="text-gray-700 text-lg">Worth of Premium Services -</p>
+          <p className="text-gray-700 text-lg">Worth of Premium Services </p>
           <button
             onClick={handleAvailNow}
             className="mt-4 bg-yellow-300 text-black px-6 py-3 rounded-lg shadow-md font-bold hover:bg-yellow-400"
@@ -55,8 +56,8 @@ const SpecialOffer = () => {
           </button>
           <p className="text-gray-500 text-sm mt-2">
             See{" "}
-            <a href="/terms" className="text-yellow-500 font-semibold hover:text-yellow-600"> Offer Terms.</a>{" "}
-            Overages apply if contact or email send limit is exceeded.{" "}
+            <Link to="/terms" className="text-yellow-500 font-semibold hover:text-yellow-600"> Offer Terms</Link>{" "}
+            Overages apply if contact or email send limit is exceeded{" "}
           
           </p>
         
@@ -67,9 +68,9 @@ const SpecialOffer = () => {
     Total Value - ₹4,10,000
   </p>
   <div className="mt-2"> {/* Added a div for better spacing */}
-    <a href="/terms" className="text-black font-semibold hover:underline text-center block">
-      See Offer Terms.
-    </a>
+    <Link to="/terms" className="text-black font-semibold hover:underline text-center block">
+      See Offer Terms
+    </Link>
   </div>
 </div>
 </div>

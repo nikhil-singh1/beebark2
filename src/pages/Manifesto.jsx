@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../components/Header";
 
 export default function ManifestoPage() {
   const manifesto = [
@@ -65,9 +66,11 @@ export default function ManifestoPage() {
   ];
 
   return (
+    <>
+    <Header />
     <div className="bg-white text-[#221912] min-h-screen px-6 py-10">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-5xl font-bold text-yellow-500 text-center mb-6">BeeBark Manifesto</h1>
+        <h1 className="text-5xl font-bold text-yellow-500 text-center mb-6 mt-10 pt-10">BeeBark Manifesto</h1>
         <p className="text-lg text-[#221912]  text-center mb-12 max-w-3xl md:max-w-4xl mx-auto">
           BeeBark exists to help creators of space—architects, builders, designers—connect to their audience through honest, creative, and conscious digital work. We believe in clarity over clutter, intention over trends, and service over ego. This business is a vessel for integrity, growth, and impact.
         </p>
@@ -89,5 +92,6 @@ export default function ManifestoPage() {
         </div>
       </div>
     </div>
+       </>
   );
 }

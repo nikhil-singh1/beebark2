@@ -1,26 +1,32 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import { AuthContext } from "../context/AuthContext"; // Import your AuthContext
+import toast from "react-hot-toast"; // Import toast
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // Local loading state
   const navigate = useNavigate();
-  const { setToken, setUserData, login } = useContext(AuthContext); // Access context values, including the login function
+  const { setToken, setUserData } = useContext(AuthContext); // Access context values
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when login starts
 
     try {
-      const { data } = await axios.post("https://beebark-backend-2.vercel.app/api/auth/login", {
-        email,
-        password,
-        rememberMe,
-      });
+      const { data } = await axios.post(
+        "https://beebark-backend-2.vercel.app/api/auth/login",
+        {
+          email,
+          password,
+          rememberMe,
+        }
+      );
 
       localStorage.setItem("userToken", data.token);
 
@@ -30,15 +36,16 @@ const Login = () => {
       }
 
       setToken(data.token); // Update AuthContext token state
-
-      alert(data.message || "Login successful");
-
-      // Use the login function from AuthContext to set state and navigate
-      login(data.user, data.token);
-
+      toast.success(data.message || "Login successful");
+      navigate(`/users/${data.user._id}`); // Redirect to home page
     } catch (error) {
-      console.error("Error logging in:", error.response?.data?.message || error.message);
-      alert(error.response?.data?.message || "Error logging in");
+      console.error(
+        "Error logging in:",
+        error.response?.data?.message || error.message
+      );
+      toast.error(error.response?.data?.message || "Error logging in");
+    } finally {
+      setLoading(false); // Set loading to false when login process completes
     }
   };
 
@@ -57,7 +64,10 @@ const Login = () => {
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-600">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-600"
+              >
                 Email
               </label>
               <input
@@ -72,7 +82,10 @@ const Login = () => {
             </div>
 
             <div className="relative">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-600">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-600"
+              >
                 Password
               </label>
               <input
@@ -101,16 +114,22 @@ const Login = () => {
                 onChange={() => setRememberMe(!rememberMe)}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded"
               />
-              <label htmlFor="remember" className="ml-2 text-sm text-gray-600">
+              <label
+                htmlFor="remember"
+                className="ml-2 text-sm text-gray-600"
+              >
                 Keep me signed in
               </label>
             </div>
 
             <button
               type="submit"
-              className="w-full py-2 bg-yellow-500 text-white font-semibold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              disabled={loading}
+              className={`w-full py-2 bg-yellow-500 text-white font-semibold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                loading ? "cursor-not-allowed opacity-70" : ""
+              }`}
             >
-              Sign In
+              {loading ? "Logging In..." : "Sign In"}
             </button>
 
             <div className="text-center text-sm text-yellow-500  hover:text-yellow-600 mt-4">
@@ -121,7 +140,10 @@ const Login = () => {
 
             <div className="text-center text-sm text-gray-600 mt-4">
               <span>Don't have an account? </span>
-              <Link to="/register" className="text-yellow-500 hover:text-yellow-600">
+              <Link
+                to="/register"
+                className="text-yellow-500 hover:text-yellow-600"
+              >
                 Sign Up
               </Link>
             </div>
@@ -133,7 +155,10 @@ const Login = () => {
               Terms and Conditions
             </Link>{" "}
             and{" "}
-            <Link to="/privacy" className="text-yellow-500 hover:text-yellow-600">
+            <Link
+              to="/privacy"
+              className="text-yellow-500 hover:text-yellow-600"
+            >
               Privacy Policy
             </Link>
             .

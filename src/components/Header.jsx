@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
-import { LogIn, UserPlus, Instagram, Twitter, Facebook } from "lucide-react";
+import { LogIn, Instagram, Twitter, Facebook } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext"; // Import the AuthContext
@@ -9,17 +9,32 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const profileMenuRef = useRef(null); // Ref for the profile menu container
 
-  const { token, userData, logout } = useContext(AuthContext); // Get user data and token from context
+  const { token, userData, logout, loading: authLoading } = useContext(AuthContext);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleProfileMenu = () => setProfileMenuOpen(!profileMenuOpen);
 
   const handleLogout = () => {
-    logout(); // Call logout from context
+    logout();
     setProfileMenuOpen(false);
     navigate("/login");
   };
+
+  // Close profile menu on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileMenuOpen && profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {
+        setProfileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [profileMenuOpen]);
 
   return (
     <>
@@ -34,12 +49,14 @@ export default function Header() {
 
         {/* Right-side Icons and Menu */}
         <div className="flex items-center space-x-5">
-          {token ? (
+          {authLoading ? (
+            <div>Loading profile...</div>
+          ) : token ? (
             <div className="flex items-center space-x-4 relative">
               {/* Profile Avatar */}
-              <div className="relative cursor-pointer" onClick={toggleProfileMenu}>
+              <div className="relative cursor-pointer" onClick={toggleProfileMenu} ref={profileMenuRef}>
                 <img
-                  src={userData?.profilePhoto || "/profile_icon.png"} // Fetch profile photo from userData
+                  src={userData?.profilePhoto || "/profile_icon.png"}
                   alt="Profile Avatar"
                   className="w-10 h-10 rounded-full border-2 border-gray-300"
                 />
@@ -53,7 +70,10 @@ export default function Header() {
                     <ul className="py-2">
                       <li
                         className="px-4 py-2 hover:bg-yellow-300  cursor-pointer"
-                        onClick={() => navigate(`/users/${userData._id}`)} 
+                        onClick={() => {
+                          navigate(`/users/${userData?._id}`);
+                          setProfileMenuOpen(false);
+                        }}
                       >
                         Profile
                       </li>
@@ -67,20 +87,17 @@ export default function Header() {
                   </motion.div>
                 )}
               </div>
-
-              
             </div>
           ) : (
             <div className="flex items-center space-x-5">
               <Link
                 to="/login"
+                onClick={() => setMenuOpen(false)} // Close menu on login link click
                 className="flex items-center text-black font-bold space-x-2 cursor-pointer font-poppins border p-2 rounded-md hover:bg-yellow-300"
               >
                 <LogIn className="w-5 h-5" />
                 <span>Login</span>
               </Link>
-
-          
             </div>
           )}
 
@@ -115,22 +132,25 @@ export default function Header() {
                 <li>
                   <Link
                     to="/"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => setMenuOpen(false)} // Close menu on link click
                     className="hover:text-yellow-500"
                   >
                     Home
                   </Link>
                 </li>
                 <li>
-                <Link to="/service" onClick={() => setMenuOpen(false)} className="hover:text-yellow-500">
-               Services
-              </Link>
+                  <Link
+                    to="/service"
+                    onClick={() => setMenuOpen(false)} // Close menu on link click
+                    className="hover:text-yellow-500"
+                  >
+                    Services
+                  </Link>
                 </li>
-
                 <li>
                   <Link
                     to="/manifesto"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => setMenuOpen(false)} // Close menu on link click
                     className="hover:text-yellow-500"
                   >
                     BeeBark Manifesto
@@ -139,7 +159,7 @@ export default function Header() {
                 <li>
                   <Link
                     to="/contact"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => setMenuOpen(false)} // Close menu on link click
                     className="hover:text-yellow-500"
                   >
                     Contact Us
@@ -148,36 +168,35 @@ export default function Header() {
 
                 {/* Mobile Only: Sign In and Join as a Pro */}
                 <li className="md:hidden mt-8 border-t pt-4">
-                  
-                    <div className="md:hidden text-md underline text-yellow-400 mt-5 font-poppins mb-3">
-                      info@thebeebark.com
-                    </div>
-                    <div className="md:hidden text-md underline text-yellow-400 font-poppins mb-10">
-                      +91 7701858312
-                    </div>
-                    <div className="flex space-x-4 mt-4">
-              <a
-                href="https://www.facebook.com/profile.php?id=61560873622756"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Facebook className="w-6 h-6 text-gray-700 hover:text-gray-800" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Twitter className="w-6 h-6 text-gray-700 hover:text-gray-800" />
-              </a>
-              <a
-                href="https://www.instagram.com/thebeebark/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram className="w-6 h-6 text-gray-700 hover:text-gray-800" />
-              </a>
-            </div>
+                  <div className="md:hidden text-md underline text-yellow-400 mt-5 font-poppins mb-3">
+                    info@thebeebark.com
+                  </div>
+                  <div className="md:hidden text-md underline text-yellow-400 font-poppins mb-10">
+                    +91 7701858312
+                  </div>
+                  <div className="flex space-x-4 mt-4">
+                    <a
+                      href="https://www.facebook.com/profile.php?id=61560873622756"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Facebook className="w-6 h-6 text-gray-700 hover:text-gray-800" />
+                    </a>
+                    <a
+                      href="https://twitter.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Twitter className="w-6 h-6 text-gray-700 hover:text-gray-800" />
+                    </a>
+                    <a
+                      href="https://www.instagram.com/thebeebark/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Instagram className="w-6 h-6 text-gray-700 hover:text-gray-800" />
+                    </a>
+                  </div>
                 </li>
               </ul>
             </div>

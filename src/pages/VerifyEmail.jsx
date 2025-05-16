@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const VerifyOtp = () => {
   const location = useLocation();
@@ -8,8 +9,16 @@ const VerifyOtp = () => {
   const firstname = location.state?.firstname | "";
 
   const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleVerify = async () => {
+    if (!otp || otp.length !== 6 || !/^\d+$/.test(otp)) {
+      toast.error("Please enter a valid 6-digit OTP.");
+      return;
+    }
+
+    setLoading(true);
+
     try {
       const response = await fetch("https://beebark-backend-2.vercel.app/api/otp/verify-otp", {
         method: "POST",
@@ -19,12 +28,18 @@ const VerifyOtp = () => {
 
       const data = await response.json();
 
-      if (!response.ok) throw new Error(data.message || "Verification failed");
+      if (!response.ok) {
+        toast.error(data.message || "Verification failed");
+        throw new Error(data.message || "Verification failed");
+      }
 
-      alert("OTP Verified Successfully!");
+      toast.success("OTP Verified Successfully!");
       navigate("/thankyou", { state: { firstname } });
     } catch (err) {
-      alert(err.message);
+      console.error("OTP Verification Error:", err);
+      // toast.error(err.message); // Already called above
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,11 +50,10 @@ const VerifyOtp = () => {
           Verify OTP
         </h2>
         <p className="text-center text-gray-600 mb-1">
-          An OTP has been sent to <strong>{email}.
-          </strong>
+          An OTP has been sent to <strong>{email}.</strong>
         </p>
         <p className="text-center text-yellow-600 mb-4">
-        Please check your Spam or Junk folder if you haven't received the email.
+          Please check your Spam or Junk folder if you haven't received the email.
         </p>
 
         <input
@@ -52,9 +66,12 @@ const VerifyOtp = () => {
 
         <button
           onClick={handleVerify}
-          className="w-full bg-yellow-500 hover:bg-yellow-600 text-white p-3 rounded font-semibold"
+          disabled={loading}
+          className={`w-full bg-yellow-500 hover:bg-yellow-600 text-white p-3 rounded font-semibold ${
+            loading ? "cursor-not-allowed opacity-70" : ""
+          }`}
         >
-          Verify OTP
+          {loading ? "Verifying..." : "Verify OTP"}
         </button>
       </div>
     </div>

@@ -11,7 +11,7 @@ const RegisterNowSection = () => {
 
   useEffect(() => {
     // Set a fixed date, for example 15 days from initial launch
-    const fixedTargetDate = new Date("2025-05-19T00:00:00");
+    const fixedTargetDate = new Date("2025-05-24T00:00:00");
 
     const updateCountdown = () => {
       const now = new Date();
@@ -41,16 +41,18 @@ const RegisterNowSection = () => {
         worth of premium services.
       </p>
 
-      <div className="text-yellow-400 font-bold text-xl  py-3">
-        ⏳ {daysLeft} Days Left
-      </div>
-
-      <button
-        onClick={handleAvailNow}
-        className="mt-4 px-8 py-3 text-lg font-semibold bg-white text-[#221912] border-2 border-yellow-500 rounded-full hover:bg-yellow-500 hover:text-white transition"
-      >
-        Register Now
-      </button>
+      {/* Container for Days Left and Button */}
+     <div className="flex flex-col items-center">
+  <div className="text-yellow-400 font-bold text-xl py-3 -ml-2 md:-ml-4"> {/* Added negative margin */}
+    ⏳ {daysLeft} Days Left
+  </div>
+  <button
+    onClick={handleAvailNow}
+    className="mt-4 px-8 py-3 text-lg font-semibold bg-white text-[#221912] border-2 border-yellow-500 rounded-full hover:bg-yellow-500 hover:text-white transition"
+  >
+    Register Now
+  </button>
+</div>
     </section>
   );
 };

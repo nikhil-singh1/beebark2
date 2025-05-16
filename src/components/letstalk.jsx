@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import emailjs from '@emailjs/browser';
 import { Snackbar } from '@mui/material';
+import Header from "./Header";
 
 export default function LetsTalk() {
   const location = useLocation();
@@ -70,6 +71,8 @@ export default function LetsTalk() {
   };
 
   return (
+    <>
+    <Header />
     <div className="bg-white pt-28 pb-16 px-6">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Form Section */}
@@ -151,6 +154,7 @@ export default function LetsTalk() {
                 <option value="Architect">Architect</option>
                 <option value="Construction">Construction</option>
                 <option value="Real Estate">Real Estate</option>
+                <option value="Vendor">Vendor</option>
                 <option value="Designer">Designer</option>
                 <option value="others">Others</option>
               </select>
@@ -216,5 +220,6 @@ export default function LetsTalk() {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       />
     </div>
+     </>
   );
 }

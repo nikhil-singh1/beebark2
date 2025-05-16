@@ -26,7 +26,7 @@ export default function Contact() {
 
   return (
     <>
-   
+      <Header />
     <div className="bg-gray-50 pt-28 pb-20 px-6">
       <div className="max-w-screen-xl mx-auto px-4 lg:px-8">
         {/* Header Section */}

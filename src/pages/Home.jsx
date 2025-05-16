@@ -27,7 +27,7 @@ const Home = () => {
 
   return (
     <main className="bg-white overflow-auto h-full">
-  
+        <Header/>
       <HeroSection />
       {/* <Hero /> */}
       <FuturisticTimer />
