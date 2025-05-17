@@ -7,7 +7,8 @@ export const AuthContext = createContext(null); // Explicitly set initial value 
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const backendUrl = "https://beebark-backend-2.vercel.app/api";
+  const backendUrl = "https://beebark-backend-2.vercel.app";
+
 
   const [token, setToken] = useState(null);
   const [userData, setUserData] = useState(null);

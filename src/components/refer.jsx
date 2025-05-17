@@ -8,6 +8,7 @@ export default function ReferralSection() {
     const [isSending, setIsSending] = useState(false);
     const [invitationSent, setInvitationSent] = useState(false);
     const [referrals, setReferrals] = useState([]);
+    const [totalCredits, setTotalCredits] = useState(0); // State to store total credits
     const { token, backendUrl, userData } = useContext(AuthContext);
 
     useEffect(() => {
@@ -24,6 +25,7 @@ export default function ReferralSection() {
                     );
                     if (response.data.success) {
                         setReferrals(response.data.referrals);
+                        setTotalCredits(response.data.totalCredits || 0); // Extract totalCredits from the response
                     } else {
                         toast.error(response.data.message || 'Failed to fetch referrals.');
                     }
@@ -85,7 +87,7 @@ export default function ReferralSection() {
     };
 
     return (
-         <div className="bg-[#221912] text-white p-6 text-center mx-auto">
+          <div className="bg-[#221912] text-white p-6 text-center mx-auto">
             <h2 className="text-xl font-bold">
                 Refer a Friend & Earn 5,000 Credit towards your next marketing campaign.
             </h2>
@@ -111,6 +113,13 @@ export default function ReferralSection() {
                     {isSending ? 'Sending...' : invitationSent ? 'Invitation Sent' : 'Invite'}
                 </button>
             </div>
+
+            {totalCredits > 0 && ( // Conditionally render if there are credits
+                <div className="mt-6">
+                    <h3 className="text-lg font-semibold">Total Referral Credits Earned:</h3>
+                    <p className="text-xl font-bold text-yellow-400">{totalCredits}</p>
+                </div>
+            )}
 
             {referrals.length > 0 && (
                 <div className="mt-8">
