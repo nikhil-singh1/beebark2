@@ -3,7 +3,7 @@ import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import Select from 'react-select';
 import ProfileLayout from './ProfileLayout'; // Adjust the path if needed
-import { toast } from 'react-toastify';
+import toast from "react-hot-toast"; // Import toast
 
 const ProfileSetup = () => {
     const { userData, token, backendUrl, loadUserProfileData } = useContext(AuthContext);
@@ -245,7 +245,7 @@ const ProfileSetup = () => {
             {preview && <img src={preview} alt={label} className="mb-2 max-h-48 rounded-md" />}
             <input
                 type="file"
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                className="shadow-sm focus:ring-[#221912] focus:border-[#221912] block w-full sm:text-sm border-gray-300 rounded-md"
                 onChange={e => handleImageChange(field, e, setPreview)}
             />
             {errors[field] && <p className="mt-1 text-red-500 text-sm">{errors[field]}</p>}
@@ -274,7 +274,7 @@ const ProfileSetup = () => {
             <button
                 type="button"
                 onClick={() => handleAddItemToArray(field, itemKeys.reduce((acc, key) => ({ ...acc, [key]: "" }), {}))}
-                className="mt-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 text-sm"
+                className="mt-2 px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 text-sm"
             >
                 Add {label.slice(0, -1)}
             </button>
@@ -332,7 +332,7 @@ const ProfileSetup = () => {
             <label className="block font-medium text-gray-700 mb-1">{label}</label>
             <input
                 type={type}
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                className="shadow-sm focus:ring-yellow-500 focus:border-yellow-500 block w-full sm:text-sm border-gray-300 rounded-md"
                 value={initialValue || ''}
                 onChange={e => customOnChange(e.target.value)}
                 placeholder={label}
@@ -531,7 +531,7 @@ const ProfileSetup = () => {
                         {renderImageUpload("Cover Photo", "coverImage", coverPhotoPreview, setCoverPhotoPreview)}
                         <button
                             onClick={() => handleSaveSection('Profile Info')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Profile Info
                         </button>
@@ -555,7 +555,7 @@ const ProfileSetup = () => {
                 
                             <button
                                 onClick={() => handleSaveSection('Contact Info')}
-                                className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                                className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                             >
                                 Save Contact Info
                             </button>
@@ -571,7 +571,7 @@ const ProfileSetup = () => {
                         {renderInput("Website", "website")}
                         <button
                             onClick={() => handleSaveSection('Social Media')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Social Media
                         </button>
@@ -595,7 +595,7 @@ const ProfileSetup = () => {
                         ])}
                         <button
                             onClick={() => handleSaveSection('Business Info')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Business Info
                         </button>
@@ -608,7 +608,7 @@ const ProfileSetup = () => {
                         {renderArrayInput("Work History", "workHistory", ["name", "role", "duration"], renderWorkHistoryInputs)}
                         <button
                             onClick={() => handleSaveSection('Experience')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Experience
                         </button>
@@ -621,7 +621,7 @@ const ProfileSetup = () => {
                         {renderArrayInput("Testimonials", "testimonials", ["clientName", "message", "date"], renderTestimonialInputs)}
                         <button
                             onClick={() => handleSaveSection('Testimonials')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Testimonials
                         </button>
@@ -634,7 +634,7 @@ const ProfileSetup = () => {
                         {renderArrayInput("Awards", "awards", ["title", "organization", "year", "description"], renderAwardInputs)}
                         <button
                             onClick={() => handleSaveSection('Awards')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Awards
                         </button>
@@ -647,7 +647,7 @@ const ProfileSetup = () => {
                         {renderArrayInput("Projects", "projects", ["title", "type", "yearStatus", "location", "budgetRange", "roleInProject", "projectLink"], renderProjectInputs)}
                         <button
                             onClick={() => handleSaveSection('Projects')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Projects
                         </button>
@@ -676,7 +676,7 @@ const ProfileSetup = () => {
                         {renderSelect("Open to Hiring or Internship", "openToHiringOrInternship", openToHiringOptions)}
                         <button
                             onClick={() => handleSaveSection('Collaboration')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Collaboration
                         </button>
@@ -690,7 +690,7 @@ const ProfileSetup = () => {
                             <label className="block font-medium text-gray-700 mb-1">Certifications (comma-separated)</label>
                             <input
                                 type="text"
-                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                className="shadow-sm focus:ring-[#221912] focus:border-[#221912] block w-full sm:text-sm border-gray-300 rounded-md"
                                 value={state.certifications.join(', ')}
                                 onChange={e => handleFieldChange("certifications", e.target.value.split(',').map(item => item.trim()))}
                             />
@@ -698,7 +698,7 @@ const ProfileSetup = () => {
                         </div>
                         <button
                             onClick={() => handleSaveSection('Certifications')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Certifications
                         </button>
@@ -712,7 +712,7 @@ const ProfileSetup = () => {
                             <label className="block font-medium text-gray-700 mb-1">Associations (comma-separated)</label>
                             <input
                                 type="text"
-                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                className="shadow-sm focus:ring-[#221912] focus:border-[#221912] block w-full sm:text-sm border-gray-300 rounded-md"
                                 value={state.associations.join(', ')}
                                 onChange={e => handleFieldChange("associations", e.target.value.split(',').map(item => item.trim()))}
                             />
@@ -720,7 +720,7 @@ const ProfileSetup = () => {
                         </div>
                         <button
                             onClick={() => handleSaveSection('Associations')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Associations
                         </button>
@@ -733,7 +733,7 @@ const ProfileSetup = () => {
                         {renderArrayInput("Team Members", "teamMembers", ["name", "role", "bio", "linkedProfileId"], renderTeamMemberInputs)}
                         <button
                             onClick={() => handleSaveSection('Team Members')}
-                            className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm"
+                            className="mt-6 px-4 py-2 bg-[#221912] text-white rounded-md hover:bg-[#221912] focus:outline-none focus:ring-2 focus:ring-[#221912] focus:ring-offset-2 text-sm"
                         >
                             Save Team Members
                         </button>

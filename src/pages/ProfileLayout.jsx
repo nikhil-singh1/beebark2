@@ -118,7 +118,7 @@ const ProfileLayout = ({
                     <button
                       key={subSection}
                       onClick={() => handleMobileSubSectionClick(subSection)}
-                      className={`block w-full text-left py-3 px-4 rounded-md hover:bg-gray-100 mb-2 text-lg flex justify-between items-center`}
+                      className={`block w-full text-left py-3 px-4 rounded-md hover:bg-[#221912] mb-2 text-lg flex justify-between items-center`}
                     >
                       <span>{subSection}</span>
                       <span>&gt;</span>
@@ -129,14 +129,14 @@ const ProfileLayout = ({
             </div>
 
             {/* Mobile Bottom Navigation */}
-            <nav className="fixed bottom-0 left-0 right-0 bg-gray-100 border-t shadow-md z-10">
+            <nav className="fixed bottom-0 left-0 right-0 bg-[#221912] border-t shadow-md z-10">
               <div className="flex justify-around items-center h-16">
                 {mobileSectionsConfig.map((category) => (
                   <button
                     key={category.name}
                     onClick={() => handleMobileCategoryClick(category.name)}
-                    className={`flex flex-col items-center justify-center text-gray-600 focus:outline-none ${
-                      currentMobileCategory === category.name ? 'text-orange-500' : ''
+                    className={`flex flex-col items-center justify-center text-white focus:outline-none ${
+                      currentMobileCategory === category.name ? 'text-yellow-600' : ''
                     } w-full`} // Make buttons full width
                   >
                     {category.icon}
@@ -200,7 +200,7 @@ const ProfileLayout = ({
                       <button
                         key={section}
                         onClick={() => onSectionChange(section)}
-                        className={`w-full text-left py-2.5 px-3 rounded transition text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-500 ${activeSection === section ? 'bg-orange-100 font-semibold text-orange-700' : 'hover:bg-gray-100 text-gray-700'}`}
+                        className={`w-full text-left py-2.5 px-3 rounded transition text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-yellow-500 ${activeSection === section ? 'bg-[#221912] font-semibold text-yellow-500' : 'hover:bg-gray-100 text-gray-700'}`}
                       >
                         {section}
                       </button>
@@ -229,7 +229,7 @@ const ProfileLayout = ({
                         <button
                           key={subSection}
                           onClick={() => handleMobileSubSectionClick(subSection)}
-                          className={`block w-full text-left py-2 px-3 rounded hover:bg-gray-100 ${currentSubSection === subSection ? 'bg-gray-100 font-semibold' : ''}`}
+                          className={`block w-full text-left py-2 px-3 rounded hover:bg-[#221912] ${currentSubSection === subSection ? 'bg-[#221912] font-semibold' : ''}`}
                         >
                           {subSection}
                         </button>

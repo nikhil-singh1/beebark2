@@ -31,38 +31,36 @@ export const AuthProvider = ({ children }) => {
 
 
 
-  const loadUserProfileData = async () => {
-    if (!token) {
-      setLoading(false);
-      return; // Exit if no token
-    }
+ const loadUserProfileData = async () => {
+  if (!token || !userData?._id) {
+    setLoading(false);
+    return;
+  }
 
-    setLoading(true);
-    setError(null);
-    try {
-      const { data } = await axios.get(`${backendUrl}/api/users/get-profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  setLoading(true);
+  setError(null);
+  try {
+    const { data } = await axios.get(`${backendUrl}/api/users/get-profile?userId=${userData._id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      if (data.success) {
-        setUserData(data.userData);
-        localStorage.setItem('userDetails', JSON.stringify(data.userData));
-      } else {
-        setError(data.message || "Failed to load profile");
-        toast.error(data.message || "Failed to load profile");
-        //removed setToken(null) and logout()
-      }
-    } catch (err) {
-        const errorMessage = err.response?.data?.message || err.message || "An error occurred";
-        setError(errorMessage);
-        toast.error(errorMessage);
-        //removed setToken(null) and logout()
-    } finally {
-      setLoading(false);
+    if (data.success) {
+      setUserData(data.userData);
+      localStorage.setItem('userDetails', JSON.stringify(data.userData));
+    } else {
+      setError(data.message || "Failed to load profile");
+      toast.error(data.message || "Failed to load profile");
     }
-  };
+  } catch (err) {
+    const errorMessage = err.response?.data?.message || err.message || "An error occurred";
+    setError(errorMessage);
+    toast.error(errorMessage);
+  } finally {
+    setLoading(false);
+  }
+};
 
     useEffect(() => {
         if (token) {
@@ -75,7 +73,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const { data } = await axios.post(`${backendUrl}/auth/login`, {
+      const { data } = await axios.post(`${backendUrl}/api/auth/login`, {
         email,
         password,
         rememberMe,

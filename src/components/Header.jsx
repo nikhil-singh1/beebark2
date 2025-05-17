@@ -58,7 +58,7 @@ export default function Header() {
                 <img
                   src={userData?.profilePhoto || "/profile_icon.png"}
                   alt="Profile Avatar"
-                  className="w-10 h-10 rounded-full border-2 border-gray-300"
+                  className="w-10 h-10 rounded-full border-2 border-gray-300 bg-yellow-400"
                 />
                 {profileMenuOpen && (
                   <motion.div
