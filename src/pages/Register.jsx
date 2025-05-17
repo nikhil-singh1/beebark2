@@ -3,7 +3,6 @@ import Footer from '../components/Footer';
 
 import Header from '../components/Header';
 import JoinUs from '../components/joinus';
-import ReferralSection2 from '../components/refer2';
 
 
 const Register = () => {
@@ -11,7 +10,7 @@ const Register = () => {
     <main className="bg-white">
       <Header/>
       <JoinUs />
-      <ReferralSection2 />
+
     </main>
   )
 }
