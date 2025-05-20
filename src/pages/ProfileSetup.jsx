@@ -422,7 +422,7 @@ const ProfileSetup = () => {
                 };
                 fieldsToValidate = ["awards"];
                 break;
-            case "Projects":
+            case "Projects/ Catalog":
                 dataToSave = {
                     projects: state.projects,
                 };
