@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
-import { LogIn, Instagram, Twitter, Facebook } from "lucide-react";
+import { LogIn, Instagram, Twitter, Facebook, Linkedin} from "lucide-react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext"; // Import the AuthContext
@@ -183,11 +183,11 @@ export default function Header() {
                       <Facebook className="w-6 h-6 text-gray-700 hover:text-gray-800" />
                     </a>
                     <a
-                      href="https://twitter.com"
+                      href="https://www.linkedin.com/company/thebeebark/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Twitter className="w-6 h-6 text-gray-700 hover:text-gray-800" />
+                      <Linkedin className="w-6 h-6 text-gray-700 hover:text-gray-800" />
                     </a>
                     <a
                       href="https://www.instagram.com/thebeebark/"
@@ -219,11 +219,11 @@ export default function Header() {
                 <Facebook className="w-6 h-6 text-gray-700 hover:text-gray-800" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://www.linkedin.com/company/thebeebark/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Twitter className="w-6 h-6 text-gray-700 hover:text-gray-800" />
+                <Linkedin className="w-6 h-6 text-gray-700 hover:text-gray-800" />
               </a>
               <a
                 href="https://www.instagram.com/thebeebark/"

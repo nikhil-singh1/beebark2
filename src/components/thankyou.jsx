@@ -48,7 +48,7 @@ const Thankyou = () => {
                         <a href="https://www.facebook.com/profile.php?id=61560873622756" className="text-white hover:text-gray-200 text-lg" target="_blank" rel="noopener noreferrer">
                             <FaFacebook />
                         </a>
-                        <a href="https://www.linkedin.com/" className="text-white hover:text-gray-200 text-lg" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.linkedin.com/company/thebeebark/" className="text-white hover:text-gray-200 text-lg" target="_blank" rel="noopener noreferrer">
                             <FaLinkedin />
                         </a>
                     </div>

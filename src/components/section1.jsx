@@ -11,7 +11,7 @@ const RegisterNowSection = () => {
 
   useEffect(() => {
     // Set a fixed date, for example 15 days from initial launch
-    const fixedTargetDate = new Date("2025-05-24T00:00:00");
+    const fixedTargetDate = new Date("2025-06-04T00:00:00");
 
     const updateCountdown = () => {
       const now = new Date();
