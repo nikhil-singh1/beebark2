@@ -50,7 +50,7 @@ const ForgotPassword = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 p-3 rounded mb-4 focus:ring-2 focus:ring-yellow-500"
+              className="w-full border border-gray-300 text-black p-3 rounded mb-4 focus:ring-2 focus:ring-yellow-500"
               placeholder="Your email"
             />
             <button
@@ -69,7 +69,7 @@ const ForgotPassword = () => {
               type="text"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
-              className="w-full border border-gray-300 p-3 rounded mb-4 focus:ring-2 focus:ring-yellow-500"
+              className="w-full border border-gray-300 text-black p-3 rounded mb-4 focus:ring-2 focus:ring-yellow-500"
               placeholder="Enter 6-digit OTP"
             />
             <button
@@ -88,7 +88,7 @@ const ForgotPassword = () => {
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              className="w-full border border-gray-300 p-3 rounded mb-4 focus:ring-2 focus:ring-yellow-500"
+              className="w-full border border-gray-300 text-black p-3 rounded mb-4 focus:ring-2 focus:ring-yellow-500"
               placeholder="New password"
             />
             <button
