@@ -1,12 +1,35 @@
+<!-- index.html -->
+
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJD2Y22FZS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JJD2Y22FZS');
+    </script>
+
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/bbark.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="At TheBeeBark, we craft digital solutions inspired by nature’s architects. With integrity and creativity, we empower builders, architects, and designers." />
+
     <title>BeeBark Pro</title>
+    <meta name="description" content="At BeeBark, we craft digital solutions inspired by nature’s architects. With integrity and creativity, we empower builders, architects, and designers." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/bbark.png" />
+
+    <!-- SEO: Open Graph -->
+    <meta property="og:title" content="BeeBark Pro" />
+    <meta property="og:description" content="Crafting digital solutions inspired by nature’s architects." />
+    <meta property="og:image" content="/preview.png" />
+    <meta property="og:url" content="https://thebeebark.com" />
+    <meta property="og:type" content="website" />
+
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
