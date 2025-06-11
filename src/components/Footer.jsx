@@ -15,7 +15,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-herocolor text-white py-12 font-montserrat">
+      <footer className="bg-[#221912] text-white py-12 font-montserrat">
         {/* Footer Container */}
         <div className="container mx-auto px-6 lg:px-12">
           <div className="flex flex-col lg:flex-row justify-between lg:space-x-12">
@@ -66,12 +66,12 @@ export default function Footer() {
               {/* Get in Touch */}
               <div className="mb-8">
                 <h3 className="text-2xl font-bold mb-4 md:text-3xl font-poppins">Get in Touch</h3>
-                <p className="text-md text-yellow-400 font-semibold md:text-xl">
+                <p className="text-md text-yellow-300 font-semibold md:text-xl">
                   <span className="block mb-2">
-                    <a href="tel:+917701858312" className="hover:text-yellow-500">+91 7701858312</a>
+                    <a href="tel:+917701858312" className="hover:text-yellow-300">+91 7701858312</a>
                   </span>
                   <span className="block">
-                    <a href="mailto:info@thebeebark.com" className="hover:text-yellow-500">info@thebeebark.com</a>
+                    <a href="mailto:info@thebeebark.com" className="hover:text-yellow-300">info@thebeebark.com</a>
                   </span>
                 </p>
               </div>
@@ -125,7 +125,7 @@ export default function Footer() {
                 <input
                   type="text"
                   id="name"
-                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-yellow-300"
                   placeholder="Your Name"
                 />
               </div>
@@ -136,7 +136,7 @@ export default function Footer() {
                 <input
                   type="email"
                   id="email"
-                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-yellow-300"
                   placeholder="Your Email"
                 />
               </div>
@@ -146,7 +146,7 @@ export default function Footer() {
                 </label>
                 <textarea
                   id="message"
-                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-yellow-300"
                   placeholder="Your Message"
                 />
               </div>

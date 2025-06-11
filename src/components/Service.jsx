@@ -5,24 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
-  {
-    title: "AI-Enhanced Web Presence & Digital Growth",
-    description:
-      "Leveraging Al to optimize online visibility, engagement, and business expansion. Transforming digital strategies with intelligent automation and data-driven insights.",
-    image: "/image1.jpeg",
-  },
-  {
-    title: "Luxury Branding & Identity Elevation",
-    description:
-      "Crafting exclusive brand identities that exude sophistication, prestige, and timeless appeal. Elevating perception through refined aesthetics, storytelling, and strategic positioning.",
-    image: "/image2.jpeg",
-  },
-  {
-    title: "Elite Networking & Industry Synergy Hub",
-    description:
-      "Connecting top professionals to foster collaboration, growth, and industry innovation. A premier platform for high-impact partnerships and strategic alliances.",
-    image: "/image3.jpeg",
-  },
+ 
   {
     title: "AI-Driven Client Acquisition & Smart Lead Generation",
     description:
@@ -104,7 +87,7 @@ const Service = () => {
 
  <div className="w-1/3 text-left px-5 mr-20 pr-20 z-10">
     <h2 className="text-3xl md:text-7xl font-bold text-[#221912]">
-      Our <span className="text-yellow-400 text-4xl md:text-8xl">SaaS</span> Services
+      Our <span className="text-yellow-400 text-4xl md:text-8xl">Features</span>
     </h2>
   </div>
     

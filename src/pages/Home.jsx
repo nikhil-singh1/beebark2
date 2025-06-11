@@ -11,6 +11,11 @@ import ReferralSection from '../components/refer';
 import ExclusiveOffer from '../components/exclusiveoffer';
 import RegisterNowSection from '../components/section1';
 import FuturisticTimer from '../components/Welcome';
+import AboutUs from '../components/aboutus';
+import Hero1 from '../components/DreamHero';
+import AutoScrollPortfolio from '../components/Portfolio_auto';
+import Footer from '../components/Footer';
+import Animation from '../components/Animation';
 
 const Home = () => {
 
@@ -28,18 +33,21 @@ const Home = () => {
   return (
     <main className="bg-white overflow-auto h-full">
         <Header/>
-      <HeroSection />
+        <Animation />
       {/* <Hero /> */}
-      <FuturisticTimer />
+      <Hero1 />
+      <AboutUs />
       <Service />
-      <SpecialOffer />
+       <AutoScrollPortfolio/>
+      
       {/* <Highlights />
       <Model />
       <Features />
       <HowItWorks /> */}
-      <ExclusiveOffer />
+     
         <ReferralSection />
-        <RegisterNowSection />
+        <Footer />
+        
     
     
     </main>
