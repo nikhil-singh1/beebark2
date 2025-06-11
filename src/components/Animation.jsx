@@ -108,7 +108,7 @@ const Animation = () => {
   }, []);
 
   return (
-    <div className="gradient-container-wrapper">
+    <div className="gradient-container-wrapper mt-12">
       <div className="gradient-container">
         <canvas ref={canvasRef} className="Gradient__canvas" />
         <div className="gradient-content">

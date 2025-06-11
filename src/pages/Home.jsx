@@ -38,14 +38,7 @@ const Home = () => {
       <Hero1 />
       <AboutUs />
       <Service />
-       <AutoScrollPortfolio/>
-      
-      {/* <Highlights />
-      <Model />
-      <Features />
-      <HowItWorks /> */}
-     
-        <ReferralSection />
+    
         <Footer />
         
     

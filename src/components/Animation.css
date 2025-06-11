@@ -1,7 +1,7 @@
 .gradient-container-wrapper {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   overflow: hidden;
   background: white;
 }
@@ -60,6 +60,16 @@
     top: 4%;             /* Adjust vertical spacing */
   }
 
+
+
+  .gradient-container-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 50vh;
+  overflow: hidden;
+  background: white;
+}
+
   .gradient-content {
     top: 10%;
   }
@@ -68,6 +78,7 @@
     font-size: clamp(1.2rem, 5vw, 2.5rem);
   }
 }
+
 
 .bottom-yellow-strip {
   width: 100%;
