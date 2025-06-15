@@ -97,7 +97,7 @@ const Hero1 = () => {
 
       {/* Animated "BeeBark" */}
       <div
-        className="absolute left-[30%] md:left-[35%] top-[45%] md:top-[33%] flex gap-2 text-[12vw] md:text-[13vw] font-extrabold text-herocolor z-20"
+        className="absolute left-[30%] md:left-[35%] top-[45%] md:top-[33%] flex gap-2 text-[12.4vw] md:text-[13vw] font-extrabold text-herocolor z-20"
         style={{ fontFamily }}
       >
         {letterTrail.map((props, index) => (
