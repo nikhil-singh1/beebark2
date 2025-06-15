@@ -1,90 +1,75 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSpring, useTrail, animated } from "@react-spring/web";
-
-// -------------------------------------------------------------
-// If you do not already have Myriad available system‑wide, create
-// a fonts.css (or add to your global stylesheet) with something
-// like the following and import it once in your app entry point:
-//
-// @font-face {
-//   font-family: "Myriad Pro";
-//   src: url("/fonts/MyriadPro-Regular.woff2") format("woff2"),
-//        url("/fonts/MyriadPro-Regular.woff")  format("woff");
-//   font-weight: 400;
-//   font-style:  normal;
-//   font-display: swap;
-// }
-// -------------------------------------------------------------
+import "../assets/fonts.css"; // ✅ Import custom font CSS
 
 const fontFamily = "'Myriad Pro', 'Myriad', sans-serif";
 
 const Hero1 = () => {
   const canvasRef = useRef(null);
   const letters = "BeeBark".split("");
-  const tagline = "Architecture,Interior,Real Estate,Construction".split(" ");
+  const tagline = "Architecture, Interior, Real Estate, Construction".split(","); // ✅ Fix spacing
 
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth <= 768 : false
   );
 
-  // Detect screen resize and update `isMobile`
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Set initial value
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  // Left logo animation (initial state)
   const [leftLogoSpring, setLeftLogoSpring] = useSpring(() => ({
     transform: "translateX(0px)",
     opacity: 1,
     config: { tension: 100, friction: 20 },
   }));
 
-  // Right logo animation (moves out slowly)
   const [rightLogoSpring, setRightLogoSpring] = useSpring(() => ({
     transform: "translateX(0px)",
     opacity: 1,
     config: { tension: 50, friction: 30 },
   }));
 
-  // Letter animation (gradually revealed)
   const letterTrail = useTrail(letters.length, {
     opacity: 1,
     transform: "translateX(0px)",
     from: { opacity: 0, transform: "translateX(20px)" },
-    delay: 1500, // Delay before letters appear
+    delay: 1500,
     config: { tension: 100, friction: 25 },
   });
 
-  // Tagline animation (gradually revealed)
   const taglineTrail = useTrail(tagline.length, {
     opacity: 1,
     transform: "translateX(0px)",
     from: { opacity: 0, transform: "translateX(20px)" },
-    delay: 2000, // Delay before tagline appears
+    delay: 2000,
     config: { tension: 100, friction: 25 },
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      setRightLogoSpring({
-        transform: isMobile ? "translateX(400px)" : "translateX(1000px)", // Different for mobile & laptop
-      });
+    const rightShift = isMobile ? 400 : 1000;
+    const leftShift = isMobile ? -160 : -380;
+
+    const timer1 = setTimeout(() => {
+      setRightLogoSpring({ transform: `translateX(${rightShift}px)` });
     }, 1000);
 
-    setTimeout(() => {
-      setLeftLogoSpring({
-        transform: isMobile ? "translateX(-160px)" : "translateX(-380px)", // Different for mobile & laptop
-      });
+    const timer2 = setTimeout(() => {
+      setLeftLogoSpring({ transform: `translateX(${leftShift}px)` });
     }, 1000);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, [setRightLogoSpring, setLeftLogoSpring, isMobile]);
 
   return (
@@ -92,21 +77,16 @@ const Hero1 = () => {
       className="w-full h-screen bg-white flex items-center justify-center relative overflow-hidden"
       style={{ fontFamily }}
     >
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full"
-      />
+      <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
 
       {/* Logos */}
       <div className="absolute flex items-center justify-center">
-        {/* Left logo (shifts slightly left after 2 sec) */}
         <animated.img
           src="bbark.png"
           alt="Left Logo"
           className="relative z-10 w-[40%] md:w-[80%]"
           style={leftLogoSpring}
         />
-        {/* Right logo (moves out slowly) */}
         <animated.img
           src="bbark.png"
           alt="Right Logo"
@@ -115,9 +95,9 @@ const Hero1 = () => {
         />
       </div>
 
-      {/* Animated Text "BeeBark" */}
+      {/* Animated "BeeBark" */}
       <div
-        className="absolute left-[30%] md:left-[35%] top-[43%] md:top-[35%] flex gap-2 text-[13vw] md:text-[13vw] font-extrabold text-herocolor z-20"
+        className="absolute left-[30%] md:left-[35%] top-[45%] md:top-[33%] flex gap-2 text-[11vw] md:text-[13vw] font-extrabold text-herocolor z-20"
         style={{ fontFamily }}
       >
         {letterTrail.map((props, index) => (
@@ -129,7 +109,7 @@ const Hero1 = () => {
 
       {/* Animated Tagline */}
       <div
-        className="absolute left-[30%] md:left-[35%] top-[51%] md:top-[65%] flex gap-2 text-[3vw] md:text-[3vw] font-medium text-gray-600 z-20"
+        className="absolute left-[30%] md:left-[35%] top-[52%] md:top-[65%] flex gap-1 text-[3vw] md:text-[3vw] font-medium text-gray-600 z-20"
         style={{ fontFamily }}
       >
         {taglineTrail.map((props, index) => (
