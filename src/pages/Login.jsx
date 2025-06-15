@@ -165,17 +165,56 @@ const Login = () => {
           </div>
         </div>
 
-        {/* Right Side: Image only */}
-        <div className="w-full sm:w-1/2 flex flex-col items-center justify-center bg-cover bg-center rounded-t-lg sm:rounded-r-lg">
-          <div
-            className="w-full sm:h-full bg-cover bg-center hidden sm:block"
-            style={{
-              backgroundImage: "url('/logo-chill.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          ></div>
-        </div>
+        {/* Right Side: Image + OAuth Buttons */}
+{/* Right Side: Image + OAuth Buttons Below It */}
+<div className="w-full sm:w-1/2 p-6 flex flex-col items-center justify-start bg-white rounded-b-lg sm:rounded-r-lg">
+  {/* Image at the top */}
+  <div className="w-full mb-6">
+    <img
+      src="/logo-chill.png"
+      alt="Login Illustration"
+      className="w-full h-auto object-cover rounded-lg"
+    />
+  </div>
+
+  {/* Social Login Buttons */}
+  <div className="flex flex-col items-center gap-3 w-full">
+    <button
+      onClick={() =>
+        (window.location.href =
+          "https://beebark-backend-2.vercel.app/api/auth/google")
+      }
+      className="w-full flex items-center justify-center gap-2 bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition"
+    >
+      <img src="/google-icon.png" alt="Google" className="w-5 h-5" />
+      Continue with Google
+    </button>
+
+    <button
+      onClick={() =>
+        (window.location.href =
+          "https://beebark-backend-2.vercel.app/api/auth/facebook")
+      }
+      className="w-full flex items-center justify-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-md hover:bg-[#155ec0] transition"
+    >
+      <img src="/facebook-icon.png" alt="Facebook" className="w-5 h-5" />
+      Continue with Facebook
+    </button>
+
+    <button
+      onClick={() =>
+        (window.location.href =
+          "https://beebark-backend-2.vercel.app/api/auth/apple")
+      }
+      className="w-full flex items-center justify-center gap-2 bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition"
+    >
+      <img src="/apple-icon.png" alt="Apple" className="w-5 h-5" />
+      Continue with Apple
+    </button>
+  </div>
+</div>
+
+      
       </div>
     </div>
   );

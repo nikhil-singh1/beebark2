@@ -4,7 +4,7 @@ import { useSpring, useTrail, animated } from "@react-spring/web";
 const Hero1 = () => {
   const canvasRef = useRef(null);
   const letters = "BeeBark".split("");
-  const tagline = "Strongest Web, Built For Builders".split(" ");
+  const tagline = "Architecture, Interior, Real Estate, Construction".split(" ");
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -63,7 +63,7 @@ const Hero1 = () => {
 
     setTimeout(() => {
       setLeftLogoSpring({
-        transform: isMobile ? "translateX(-140px)" : "translateX(-380px)", // Different for mobile & laptop
+        transform: isMobile ? "translateX(-160px)" : "translateX(-380px)", // Different for mobile & laptop
       });
     }, 1000);
   }, [setRightLogoSpring, setLeftLogoSpring, isMobile]);
@@ -91,7 +91,7 @@ const Hero1 = () => {
       </div>
 
       {/* Animated Text "BeeBark" */}
-      <div className="absolute left-[30%] md:left-[35%] top-[43%] md:top-[35%] flex gap-2 text-[13vw] md:text-[10vw] font-extrabold text-herocolor z-20">
+      <div className="absolute left-[30%] md:left-[35%] top-[43%] md:top-[35%] flex gap-2 text-[13vw] md:text-[13vw] font-extrabold text-herocolor z-20">
         {letterTrail.map((props, index) => (
           <animated.span key={index} style={props}>
             {letters[index]}
@@ -100,7 +100,7 @@ const Hero1 = () => {
       </div>
 
       {/* Animated Tagline */}
-      <div className="absolute left-[30%] md:left-[35%] top-[51%] md:top-[65%] flex gap-2 text-[4vw] md:text-[3vw] font-medium text-gray-600 z-20">
+      <div className="absolute left-[30%] md:left-[35%] top-[51%] md:top-[65%] flex gap-2 text-[3vw] md:text-[3vw] font-medium text-gray-600 z-20">
         {taglineTrail.map((props, index) => (
           <animated.span key={index} style={props}>
             {tagline[index]}
