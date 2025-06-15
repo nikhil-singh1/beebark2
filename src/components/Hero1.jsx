@@ -7,7 +7,7 @@ const fontFamily = "'Myriad Pro', 'Myriad', sans-serif";
 const Hero1 = () => {
   const canvasRef = useRef(null);
   const letters = "BeeBark".split("");
-  const tagline = "Architecture, Interior, Real Estate, Construction".split(","); // ✅ Fix spacing
+  const tagline = "Architecture| Interior| Real Estate| Construction".split(" "); // ✅ Fix spacing
 
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth <= 768 : false
