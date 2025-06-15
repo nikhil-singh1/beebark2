@@ -1,12 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSpring, useTrail, animated } from "@react-spring/web";
 
+// -------------------------------------------------------------
+// If you do not already have Myriad available system‑wide, create
+// a fonts.css (or add to your global stylesheet) with something
+// like the following and import it once in your app entry point:
+//
+// @font-face {
+//   font-family: "Myriad Pro";
+//   src: url("/fonts/MyriadPro-Regular.woff2") format("woff2"),
+//        url("/fonts/MyriadPro-Regular.woff")  format("woff");
+//   font-weight: 400;
+//   font-style:  normal;
+//   font-display: swap;
+// }
+// -------------------------------------------------------------
+
+const fontFamily = "'Myriad Pro', 'Myriad', sans-serif";
+
 const Hero1 = () => {
   const canvasRef = useRef(null);
   const letters = "BeeBark".split("");
-  const tagline = "Architecture, Interior, Real Estate, Construction".split(" ");
+  const tagline = "Architecture,Interior,Real Estate,Construction".split(" ");
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth <= 768 : false
+  );
 
   // Detect screen resize and update `isMobile`
   useEffect(() => {
@@ -69,8 +88,14 @@ const Hero1 = () => {
   }, [setRightLogoSpring, setLeftLogoSpring, isMobile]);
 
   return (
-    <section className="w-full h-screen bg-white flex items-center justify-center relative overflow-hidden">
-      <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
+    <section
+      className="w-full h-screen bg-white flex items-center justify-center relative overflow-hidden"
+      style={{ fontFamily }}
+    >
+      <canvas
+        ref={canvasRef}
+        className="absolute top-0 left-0 w-full h-full"
+      />
 
       {/* Logos */}
       <div className="absolute flex items-center justify-center">
@@ -91,7 +116,10 @@ const Hero1 = () => {
       </div>
 
       {/* Animated Text "BeeBark" */}
-      <div className="absolute left-[30%] md:left-[35%] top-[43%] md:top-[35%] flex gap-2 text-[13vw] md:text-[13vw] font-extrabold text-herocolor z-20">
+      <div
+        className="absolute left-[30%] md:left-[35%] top-[43%] md:top-[35%] flex gap-2 text-[13vw] md:text-[13vw] font-extrabold text-herocolor z-20"
+        style={{ fontFamily }}
+      >
         {letterTrail.map((props, index) => (
           <animated.span key={index} style={props}>
             {letters[index]}
@@ -100,7 +128,10 @@ const Hero1 = () => {
       </div>
 
       {/* Animated Tagline */}
-      <div className="absolute left-[30%] md:left-[35%] top-[51%] md:top-[65%] flex gap-2 text-[3vw] md:text-[3vw] font-medium text-gray-600 z-20">
+      <div
+        className="absolute left-[30%] md:left-[35%] top-[51%] md:top-[65%] flex gap-2 text-[3vw] md:text-[3vw] font-medium text-gray-600 z-20"
+        style={{ fontFamily }}
+      >
         {taglineTrail.map((props, index) => (
           <animated.span key={index} style={props}>
             {tagline[index]}
