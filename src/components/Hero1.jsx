@@ -56,7 +56,7 @@ const Hero1 = () => {
 
   useEffect(() => {
     const rightShift = isMobile ? 400 : 1000;
-    const leftShift = isMobile ? -160 : -380;
+    const leftShift = isMobile ? -140 : -380;
 
     const timer1 = setTimeout(() => {
       setRightLogoSpring({ transform: `translateX(${rightShift}px)` });
