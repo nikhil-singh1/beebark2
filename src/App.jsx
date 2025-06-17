@@ -18,6 +18,7 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import LetsTalk from "./components/letstalk";
 import Header from "./components/Header.jsx";
 import OAuthSuccess from "./pages/OAuthSuccess.jsx";
+import Feed from "./components/Feed.jsx";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -44,6 +45,7 @@ const AppRoutes = () => (
     <Route path="/verify-otp" element={<VerifyOtp />} />
     <Route path="/forgot-password" element={<ForgotPassword />} />
     <Route path="/oauth-success" element={<OAuthSuccess/>} />
+     <Route path="/feed" element={<Feed/>} />
 
     {/* <Route path="/users/:userId" element={<VerifyOtp/>}  /> */}
   </Routes>
