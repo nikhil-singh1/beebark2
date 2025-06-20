@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // Importing Lucide React icons for the sidebar navigation
-import { Home, MessageSquare, Bell, Settings, Bookmark, HelpCircle, Heart, MessageCircle, Repeat2, Send, Handshake } from 'lucide-react'; // Removed QuestionCircle, using HelpCircle for inquiry
+import { Home, MessageSquare, Bell, Settings, Bookmark, HelpCircle, Heart, MessageCircle, Repeat2, Send, Handshake } from 'lucide-react';
 
 // Main App Component
 const Feed = () => {
@@ -25,10 +25,12 @@ const Feed = () => {
       profilePic: 'https://placehold.co/40x40/221912/FFFFFF?text=RG',
       image: 'https://placehold.co/600x400/221912/FFFFFF?text=Property+Listing',
       caption: 'New listing available in prime location.',
+    // Added a save property to existing posts
       likes: 250,
       comments: 30,
       reposts: 10,
       filter: 'Real Estate',
+      saved: false,
     },
     {
       id: 3,
@@ -88,19 +90,19 @@ const Feed = () => {
   };
 
   return (
-    // Main container with hero colors
-    <div className="min-h-screen bg-yellow-500 font-sans text-[#221912]">
+    // Main container with white background
+    <div className="min-h-screen bg-white font-sans text-[#221912]">
       {/* Top Navigation Bar */}
-      <header className="flex items-center justify-between p-4 bg-yellow-500 shadow-md">
+      <header className="flex items-center justify-between p-4 bg-white shadow-md">
         <div className="flex items-center space-x-4">
           {/* Logo */}
-          <div className="font-bold text-2xl text-[#221912]">BeeBark</div>
+          <div className="font-bold text-2xl text-[#221912] bg-white">BeeBark</div>
           {/* Search Bar */}
           <div className="relative">
             <input
               type="text"
               placeholder="Search..."
-              className="pl-10 pr-4 py-2 rounded-full bg-[#221912] text-yellow-500 placeholder-yellow-500 focus:outline-none focus:ring-2 focus:ring-[#221912]"
+              className="pl-10 pr-4 py-2 rounded-full bg-[#221912] text-yellow-500 placeholder-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             />
             {/* Search icon */}
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500">
@@ -203,11 +205,15 @@ const Feed = () => {
                   <div className="flex space-x-6">
                     <button className="flex items-center space-x-1 hover:text-yellow-400 transition-colors">
                       <HelpCircle className="w-5 h-5" />
-                      <span>Inquiry</span>
+                      <span>Ask a Question</span>
                     </button>
                     <button className="flex items-center space-x-1 hover:text-yellow-400 transition-colors">
                       <Handshake className="w-5 h-5" />
-                      <span>Partnership</span>
+                      <span>Collaboration</span>
+                    </button>
+                    <button className="flex items-center space-x-1 hover:text-yellow-400 transition-colors">
+                      <Bookmark className="w-5 h-5" />
+                      <span>Save</span>
                     </button>
                   </div>
                 </div>
