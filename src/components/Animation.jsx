@@ -32,8 +32,8 @@ const Animation = () => {
     let nextSetIndex = 1;
 
     const colorSets = [
-      ['#fefefe', '#36261c', '#fcb81c'],
-      ['#fefefd', '#37271b', '#40251b'],
+      // ['#fefefe', '#36261c', '#fcb81c'],
+      // ['#fefefd', '#37271b', '#40251b'],
       ['#246a73', '#fdfefe', '#fab71a'],
       ['#fab91d', '#cb4457', '#55787d']
     ];
@@ -112,9 +112,20 @@ const Animation = () => {
       <div className="gradient-container">
         <canvas ref={canvasRef} className="Gradient__canvas" />
         <div className="gradient-content">
-          <h1>The Strongest Web</h1>
-          <h1>for Architects, Interior</h1>
-          <h1>Designers, Construction, etc</h1>
+        <div className="space-y-6">
+  <h1 className="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-white">
+    Strongest Web, <br />
+    Built For Builders
+  </h1>
+  <p className="text-lg md:text-xl text-white">
+    Launch your next project with blazing performance and stunning visuals.
+  </p>
+  <button className="mt-4 px-6 py-3 bg-yellow-400 text-black font-semibold rounded-lg shadow-md hover:bg-yellow-500 transition duration-300">
+    Get Started
+  </button>
+</div>
+
+        
         </div>
       </div>
       <img

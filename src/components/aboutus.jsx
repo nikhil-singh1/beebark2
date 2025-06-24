@@ -14,9 +14,7 @@ const AboutUs = () => {
             </h2>
             <p className="text-2xl text-gray-100 mb-6 text-left font-poppins">
               At <span className="font-bold text-yellow-300">TheBeeBark</span>,
-              we craft digital solutions inspired by nature’s architects. With
-              integrity and creativity, we empower builders, architects, and
-              designers.
+            we’re more than just a network — we’re a growing community where architects, interior designers, builders, and real estate professionals connect, share, and thrive.
             </p>
             <button className="px-6 py-3 text-yellow-300 font-medium border-2 border-yellow-300 rounded hover:bg-yellow-300 hover:text-white font-poppins">
               Company
