@@ -97,7 +97,7 @@ const Hero1 = () => {
 
       {/* Animated "BeeBark" */}
       <div
-        className="absolute left-[34%] md:left-[35%] top-[45%] md:top-[28%] flex gap-2 text-[11.5vw] md:text-[13vw] font-extrabold text-herocolor z-20"
+        className="absolute left-[34%] md:left-[35%] top-[45%] md:top-[28%] flex gap-2 text-[12vw] md:text-[13vw] font-extrabold text-herocolor z-20"
         style={{ fontFamily }}
       >
         {letterTrail.map((props, index) => (
@@ -109,7 +109,7 @@ const Hero1 = () => {
 
       {/* Animated Tagline */}
       <div
-        className="absolute left-[34%] md:left-[36%] top-[52%] md:top-[63%] flex gap-1 text-[10px] md:text-[2.9vw] font-medium text-gray-600 z-20"
+        className="absolute left-[34%] md:left-[36%] top-[52%] md:top-[63%] flex gap-1 text-[9px] md:text-[2.9vw] font-medium text-gray-600 z-20"
         style={{ fontFamily }}
       >
         {taglineTrail.map((props, index) => (
