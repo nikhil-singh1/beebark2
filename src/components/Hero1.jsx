@@ -109,7 +109,7 @@ const Hero1 = () => {
 
       {/* Animated Tagline */}
       <div
-        className="absolute left-[34%] md:left-[36%] top-[52%] md:top-[63%] flex gap-1 text-[12px] md:text-[2.9vw] font-medium text-gray-600 z-20"
+        className="absolute left-[34%] md:left-[36%] top-[52%] md:top-[63%] flex gap-1 text-[10px] md:text-[2.9vw] font-medium text-gray-600 z-20"
         style={{ fontFamily }}
       >
         {taglineTrail.map((props, index) => (

@@ -130,6 +130,7 @@ import VerifyOtp from "./pages/VerifyEmail.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import LetsTalk from "./components/letstalk";
 import Header from "./components/Header.jsx";
+import Feed from "./components/Feed.jsx";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -155,6 +156,7 @@ const AppRoutes = () => (
     <Route path="/login" element={<Login />} />
     <Route path="/verify-otp" element={<VerifyOtp />} />
     <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/feed" element={<Feed />} />
     {/* <Route path="/users/:userId" element={<VerifyOtp/>}  /> */}
   </Routes>
 );
