@@ -7,7 +7,7 @@ const fontFamily = "'Myriad Pro', 'Myriad', sans-serif";
 const Hero1 = () => {
   const canvasRef = useRef(null);
   const letters = "BeeBark".split("");
-  const tagline = "Architecture| Interior| Real Estate| Construction".split(" "); // ✅ Fix spacing
+  const tagline = "Architecture | Interior | Real Estate | Construction".split(" "); // ✅ Fix spacing
 
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth <= 768 : false
@@ -97,7 +97,7 @@ const Hero1 = () => {
 
       {/* Animated "BeeBark" */}
       <div
-        className="absolute left-[30%] md:left-[35%] top-[45%] md:top-[33%] flex gap-2 text-[12.4vw] md:text-[13vw] font-extrabold text-herocolor z-20"
+        className="absolute left-[34%] md:left-[35%] top-[45%] md:top-[28%] flex gap-2 text-[11.5vw] md:text-[13vw] font-extrabold text-herocolor z-20"
         style={{ fontFamily }}
       >
         {letterTrail.map((props, index) => (
@@ -109,7 +109,7 @@ const Hero1 = () => {
 
       {/* Animated Tagline */}
       <div
-        className="absolute left-[30%] md:left-[35%] top-[52%] md:top-[65%] flex gap-1 text-[3vw] md:text-[3vw] font-medium text-gray-600 z-20"
+        className="absolute left-[34%] md:left-[36%] top-[52%] md:top-[63%] flex gap-1 text-[12px] md:text-[2.9vw] font-medium text-gray-600 z-20"
         style={{ fontFamily }}
       >
         {taglineTrail.map((props, index) => (
