@@ -144,7 +144,7 @@ export default function Header() {
                     onClick={() => setMenuOpen(false)} // Close menu on link click
                     className="hover:text-yellow-500"
                   >
-                    Services
+                    Features
                   </Link>
                 </li>
                 <li>
@@ -154,6 +154,15 @@ export default function Header() {
                     className="hover:text-yellow-500"
                   >
                     BeeBark Manifesto
+                  </Link>
+                </li>
+                  <li>
+                  <Link
+                    to="/about"
+                    onClick={() => setMenuOpen(false)} // Close menu on link click
+                    className="hover:text-yellow-500"
+                  >
+                    About Us
                   </Link>
                 </li>
                 <li>
@@ -168,6 +177,18 @@ export default function Header() {
 
                 {/* Mobile Only: Sign In and Join as a Pro */}
                 <li className="md:hidden mt-8 border-t pt-4">
+                   <div className="w-full max-w-sm rounded-lg overflow-hidden shadow-lg mb-5">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14008.307963385732!2d77.20235375!3d28.62728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd4662d59141%3A0x6b45a2781432f811!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" // Replace with your actual Google Maps embed src
+                width="100%"
+                height="200" // Adjust height as needed
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Map of our location"
+              ></iframe>
+            </div>
                   <div className="md:hidden text-md underline text-yellow-400 mt-5 font-poppins mb-3">
                     info@thebeebark.com
                   </div>
@@ -204,6 +225,21 @@ export default function Header() {
 
           {/* Contact Info and Social Media Icons */}
           <div className="hidden md:flex flex-col items-start space-y-5 justify-center mx-12 mt-10">
+            {/* Map Embed - ADD THIS SECTION */}
+            <div className="w-full max-w-sm rounded-lg overflow-hidden shadow-lg mb-5">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14008.307963385732!2d77.20235375!3d28.62728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd4662d59141%3A0x6b45a2781432f811!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" // Replace with your actual Google Maps embed src
+                width="100%"
+                height="200" // Adjust height as needed
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Map of our location"
+              ></iframe>
+            </div>
+            {/* END Map Embed */}
+
             <div className="text-xl underline font-bold text-yellow-400 font-poppins">
               info@thebeebark.com
             </div>

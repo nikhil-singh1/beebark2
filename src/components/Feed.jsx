@@ -102,7 +102,7 @@ const Feed = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="pl-10 pr-4 py-2 rounded-full bg-[#221912] text-yellow-500 placeholder-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="pl-10 pr-4 py-2 rounded-full bg-white text-yellow-500 placeholder-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             />
             {/* Search icon */}
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500">

@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSpring, useTrail, animated } from "@react-spring/web";
-import "../assets/fonts.css"; // ✅ Import custom font CSS
+import "../assets/fonts.css";
 
 const fontFamily = "'Myriad Pro', 'Myriad', sans-serif";
 
 const Hero1 = () => {
   const canvasRef = useRef(null);
   const letters = "BeeBark".split("");
-  const tagline = "Architecture | Interior | Real Estate | Construction".split(" "); // ✅ Fix spacing
+  const tagline = "Architecture | Interior | Real Estate | Construction".split(","); 
 
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth <= 768 : false
@@ -56,7 +56,7 @@ const Hero1 = () => {
 
   useEffect(() => {
     const rightShift = isMobile ? 400 : 1000;
-    const leftShift = isMobile ? -130 : -380;
+    const leftShift = isMobile ? -130 : -480;
 
     const timer1 = setTimeout(() => {
       setRightLogoSpring({ transform: `translateX(${rightShift}px)` });
@@ -97,7 +97,7 @@ const Hero1 = () => {
 
       {/* Animated "BeeBark" */}
       <div
-        className="absolute left-[34%] md:left-[35%] top-[45%] md:top-[28%] flex gap-2 text-[12vw] md:text-[13vw] font-extrabold text-herocolor z-20"
+        className="absolute left-[34%] md:left-[27%] top-[45%] md:top-[28%] flex gap-2 text-[12vw] md:text-[13vw] font-extrabold text-herocolor z-20"
         style={{ fontFamily }}
       >
         {letterTrail.map((props, index) => (
@@ -109,7 +109,7 @@ const Hero1 = () => {
 
       {/* Animated Tagline */}
       <div
-        className="absolute left-[34%] md:left-[36%] top-[52%] md:top-[63%] flex gap-1 text-[9px] md:text-[2.9vw] font-medium text-gray-600 z-20"
+        className="absolute left-[34%] md:left-[28%] top-[52%] md:top-[63%] flex gap-1 text-[9px] md:text-[2.9vw] font-medium text-gray-600 z-20"
         style={{ fontFamily }}
       >
         {taglineTrail.map((props, index) => (
