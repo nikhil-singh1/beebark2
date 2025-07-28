@@ -48,17 +48,32 @@ export default function Footer() {
               </div>
 
               {/* Social Icons */}
-              <div className="flex space-x-6">
-                <a href="#" className="hover:text-gray-400 transition">
-                  <Facebook size={24} />
-                </a>
-                <a href="#" className="hover:text-gray-400 transition">
-                  <Twitter size={24} />
-                </a>
-                <a href="#" className="hover:text-gray-400 transition">
-                  <Instagram size={24} />
-                </a>
-              </div>
+        <div className="flex space-x-6 mb-6 lg:mb-8">
+            <a
+              href="https://www.facebook.com/share/14MNGec7rEP/?mibextid=wwXIfr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors duration-300"
+            >
+              <Facebook className="h-7 w-7 sm:h-8 sm:w-8" />
+            </a>
+            <a
+              href="https://www.instagram.com/agency.beebark?igsh=dmJubjQ3MzMyNnR6&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors duration-300"
+            >
+              <Instagram className="h-7 w-7 sm:h-8 sm:w-8" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/thebeebark/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors duration-300"
+            >
+              <Linkedin className="h-7 w-7 sm:h-8 sm:w-8" />
+            </a>
+          </div>
             </div>
 
             {/* Right Section */}
