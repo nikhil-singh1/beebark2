@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowUp, Facebook, Twitter, Instagram, X } from "lucide-react";
+import { ArrowUp, Facebook, Instagram, Linkedin, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -48,32 +48,32 @@ export default function Footer() {
               </div>
 
               {/* Social Icons */}
-        <div className="flex space-x-6 mb-6 lg:mb-8">
-            <a
-              href="https://www.facebook.com/share/14MNGec7rEP/?mibextid=wwXIfr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors duration-300"
-            >
-              <Facebook className="h-7 w-7 sm:h-8 sm:w-8" />
-            </a>
-            <a
-              href="https://www.instagram.com/agency.beebark?igsh=dmJubjQ3MzMyNnR6&utm_source=qr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors duration-300"
-            >
-              <Instagram className="h-7 w-7 sm:h-8 sm:w-8" />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/thebeebark/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors duration-300"
-            >
-              <Linkedin className="h-7 w-7 sm:h-8 sm:w-8" />
-            </a>
-          </div>
+              <div className="flex space-x-6 mb-6 lg:mb-8">
+                <a
+                  href="https://www.facebook.com/share/14MNGec7rEP/?mibextid=wwXIfr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                >
+                  <Facebook className="h-7 w-7 sm:h-8 sm:w-8" />
+                </a>
+                <a
+                  href="https://www.instagram.com/agency.beebark?igsh=dmJubjQ3MzMyNnR6&utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                >
+                  <Instagram className="h-7 w-7 sm:h-8 sm:w-8" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/thebeebark/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                >
+                  <Linkedin className="h-7 w-7 sm:h-8 sm:w-8" />
+                </a>
+              </div>
             </div>
 
             {/* Right Section */}
@@ -83,10 +83,14 @@ export default function Footer() {
                 <h3 className="text-2xl font-bold mb-4 md:text-3xl font-poppins">Get in Touch</h3>
                 <p className="text-md text-yellow-300 font-semibold md:text-xl">
                   <span className="block mb-2">
-                    <a href="tel:+917701858312" className="hover:text-yellow-300">+91 7701858312</a>
+                    <a href="tel:+917701858312" className="hover:text-yellow-300">
+                      +91 7701858312
+                    </a>
                   </span>
                   <span className="block">
-                    <a href="mailto:info@thebeebark.com" className="hover:text-yellow-300">info@thebeebark.com</a>
+                    <a href="mailto:info@thebeebark.com" className="hover:text-yellow-300">
+                      info@thebeebark.com
+                    </a>
                   </span>
                 </p>
               </div>
@@ -112,8 +116,11 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Footer Bottom */}
           <div className="border-t border-gray-700 mt-12 pt-6 text-center">
-            <p className="text-gray-500 text-sm lg:text-md">© 2025 Beebark. All Rights Reserved.</p>
+            <p className="text-gray-500 text-sm lg:text-md">
+              © 2025 Beebark. All Rights Reserved.
+            </p>
           </div>
         </div>
       </footer>
