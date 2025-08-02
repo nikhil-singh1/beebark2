@@ -42,7 +42,7 @@ export default function Header() {
       <header className="fixed top-0 left-0 w-full p-5 flex justify-between items-center z-50 bg-white shadow-md">
         <div className="flex items-center space-x-3">
           <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center">
-            <img src="/Agency logo-Photoroom.png" alt="BeeBark Logo" className="h-12 w-auto" />
+            <img src="/bbark.png" alt="BeeBark Logo" className="h-12 w-auto" />
             <span className="text-2xl font-bold text-black">BeeBark</span>
           </Link>
         </div>
